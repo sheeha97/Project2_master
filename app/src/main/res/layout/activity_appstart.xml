@@ -3,15 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/name_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="name"/>
-    <Button
-        android:id="@+id/confirm_button"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text = "confirm"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/user_name_textview"/>
 
 </android.support.constraint.ConstraintLayout>
