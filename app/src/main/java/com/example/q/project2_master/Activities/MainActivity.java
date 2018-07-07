@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.VIBRATE,
-            Manifest.permission.INTERNET};
+            Manifest.permission.INTERNET  };
 
+    private int requestCode= 0;
     private EditText nameInput;
     private Button confirmBtn;
     private String userName;
@@ -34,17 +36,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        // Here, thisActivity is the current activity
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this,
                     PERMISSIONS,
-                    0); }
+                    requestCode); }
         else {
             doOncreate();
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -64,29 +65,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     public void doOncreate() {
-        nameInput = (EditText) findViewById(R.id.name_input);
-        confirmBtn = (Button) findViewById(R.id.confirm_button);
-        confirmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userName = nameInput.getText().toString(); //TODO: handle emptystring exception
-                SharedPreferences sf = getSharedPreferences(preferenceName, 0);
-                SharedPreferences.Editor editor = sf.edit();//저장하려면 editor가 필요
-                editor.putString("user_name_preference", userName); // 입력
-                editor.commit(); // 파일에 최종 반영함
+        SharedPreferences sf = getSharedPreferences(preferenceName, requestCode);
+        String savedUserName = sf.getString("user_name_preference", "");
+        if (savedUserName == "") {
+            Log.d("tink_main", "no saved username");
+            setContentView(R.layout.activity_main);
+            nameInput = (EditText) findViewById(R.id.name_input);
+            confirmBtn = (Button) findViewById(R.id.confirm_button);
+            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    userName = nameInput.getText().toString();
+                    if (userName == "") {
+                        return;
+                    }
+                    SharedPreferences sf = getSharedPreferences(preferenceName, requestCode);
+                    SharedPreferences.Editor editor = sf.edit();//저장하려면 editor가 필요
+                    editor.putString("user_name_preference", userName); // 입력
+                    editor.commit(); // 파일에 최종 반영함
 
-                Intent appStartIntent = new Intent(MainActivity.this, AppStartActivity.class);
-                appStartIntent.putExtra("user_name", userName);
-                startActivity(appStartIntent);
-            }
-        });
+                    intentToAppstartActivity(userName);
+                }
+            });
+        } else {
+            Log.d("tink_main", savedUserName);
+            userName = savedUserName;
+            intentToAppstartActivity(userName);
+        }
     }
 
-    public void saveUserName() {
-
+    public void intentToAppstartActivity(String passedUserName) {
+        Intent appStartIntent = new Intent(MainActivity.this, AppStartActivity.class);
+        appStartIntent.putExtra("user_name", passedUserName);
+        startActivity(appStartIntent);
     }
 
     public static boolean hasPermissions(Context context, String... permissions){
@@ -99,7 +111,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
-
 }

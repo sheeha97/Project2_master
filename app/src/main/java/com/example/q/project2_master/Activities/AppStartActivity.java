@@ -24,6 +24,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+//TODO: 여기서 back버튼 누르면 빈화면 뜸
+
 public class AppStartActivity extends AppCompatActivity {
     TextView serverTestTextView;
     String userName;
@@ -36,16 +38,11 @@ public class AppStartActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.user_name_textview);
         Intent mainActivityIntent = getIntent();
         userName= mainActivityIntent.getStringExtra("user_name");
-
-        //String
         textView.setText(userName);
 
-        //----------------
         serverTestTextView= findViewById(R.id.server_test_textview);
         sendpostBtn = findViewById(R.id.send_post_button);
         sendpostBtn.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
                 new JSONTask().execute("http://52.231.65.108:8080/test1_post");//AsyncTask 시작시킴
@@ -86,9 +83,9 @@ public class AppStartActivity extends AppCompatActivity {
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
                     writer.write(jsonObject.toString());
                     writer.flush();
-                    writer.close();//버퍼를 받아줌
+                    writer.close();//버퍼를 닫아줌
 
-                    //서버로 부터 데이터를 받음
+                    //get data from server
                     InputStream stream = con.getInputStream();
 
                     reader = new BufferedReader(new InputStreamReader(stream));
@@ -100,7 +97,7 @@ public class AppStartActivity extends AppCompatActivity {
                         buffer.append(line);
                     }
 
-                    return buffer.toString();//서버로 부터 받은 값을 리턴해줌 아마 OK!!가 들어올것임
+                    return buffer.toString();//test1.js// res.end("Server connected to Android!")
 
                 } catch (MalformedURLException e){
                     e.printStackTrace();
