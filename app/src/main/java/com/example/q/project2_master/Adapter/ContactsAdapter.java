@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.q.project2_master.Activities.PersonsInfoActivity;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
 
@@ -50,7 +51,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ThirdActivity.class);
+                Intent intent = new Intent(view.getContext(), PersonsInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", contact_name.getText().toString());
                 bundle.putString("number", contact_number.getText().toString());
@@ -77,4 +78,4 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     }
 
-}}
+}

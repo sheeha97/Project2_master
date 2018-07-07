@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.q.project2_master.Adapter.ContactsAdapter;
+import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
 
 import java.util.ArrayList;
@@ -63,9 +64,9 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    private List<ModelContacts> getContacts() {
+    private List<ContactsModel> getContacts() {
 
-        List<ModelContacts> list = new ArrayList<>();
+        List<ContactsModel> list = new ArrayList<>();
 
         Cursor cursor = getContext().getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_ALTERNATIVE);
@@ -95,7 +96,7 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
                 }
             }
 
-            list.add(new ModelContacts(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+            list.add(new ContactsModel(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
                     mobile, home));
 
 
@@ -103,4 +104,4 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         return list;
     }
-}}
+}
