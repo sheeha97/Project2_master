@@ -1,4 +1,4 @@
-package com.example.q.project2_master;
+package com.example.q.project2_master.Activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.example.q.project2_master.R;
 
 import org.json.JSONObject;
 
