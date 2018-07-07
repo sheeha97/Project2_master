@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveUserName() {
-        
+
     }
 
     public static boolean hasPermissions(Context context, String... permissions){
