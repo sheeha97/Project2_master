@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal"
     android:background="@color/colorPrimary"
@@ -16,7 +18,8 @@
         android:src="@drawable/ic_phone"
         android:textColor="@android:color/white"
         android:textSize="15sp"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        tools:ignore="RtlCompat" />
 
     <RelativeLayout
         android:layout_width="309dp"
