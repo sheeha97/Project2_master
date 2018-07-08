@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.example.q.project2_master.Adapter.ContactsAdapter;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,8 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         recyclerView.setLayoutManager(layoutManager);
         ContactsAdapter adapter = new ContactsAdapter(getContext(), getContacts());
+
+        String jsonFile = JsonUtils.toJSon(getContacts());
 
         recyclerView.setAdapter(adapter);
 
