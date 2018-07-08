@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.R;
 import com.example.q.project2_master.AsyncTasks.SendPost;
 
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private int requestCode= 0;
     private EditText nameInput;
     private Button confirmBtn;
-    private String userName;
     private String preferenceName = "user_name_saver";
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,16 +92,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("user_name_preference", userName); // 입력
                     editor.commit(); // 파일에 최종 반영함
 
-                    String userNameJsonString = "{\"name\""+":"+"\""+userName+"\"}";
-                    try {
-                        JSONObject userNameJsonObject = new JSONObject(userNameJsonString);
-
-                    }
-                    catch (JSONException e) {
-                        Log.d("tink-exception", "json exception");
-                        e.printStackTrace();
-                    }
-                    intentToAppstartActivity(userName);
+                    doRegister("/register", userName);
+                    //intentToAppstartActivity(userName);
                 }
             });
         } else {
@@ -125,6 +118,33 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public void doRegister(String urlTail, String userName) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("name", userName);
+            RegisterServerSS register = new RegisterServerSS(urlTail, jsonObject.toString(), this, ServerSS.METHOD_POST, userName);
+            register.execute(getString(R.string.SERVER_URL) + urlTail);//AsyncTask 시작시킴
+        } catch (JSONException e) {
+            Log.d("tink-exception", "json exception");
+            e.printStackTrace();
+        }
+
+    }
+
+    class RegisterServerSS extends ServerSS {
+        String userName;
+        public RegisterServerSS(String urlTail, String stringData, Activity context, int method, String userName) {
+            super(urlTail, stringData, context, method);
+            this.userName = userName;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.d("registered", result);
+            intentToAppstartActivity(this.userName);
+        }
     }
 
 }

@@ -24,8 +24,8 @@ import java.net.URL;
 
 public class ServerSS extends AsyncTask<String, String, String> {
 
-    int METHOD_GET = 0;
-    int METHOD_POST = 1;
+    public static int METHOD_GET = 0;
+    public static int METHOD_POST = 1;
 
     String urlTail;
     String stringData;

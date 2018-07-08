@@ -60,9 +60,9 @@ public class AppStartActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //doRegister(urlTail, userName);
+                doRegister(urlTail, "a-a");
                 //doGetTest("/get_test");
-                doTest("/test1_post", userName);
+                //doTest("/test1_post", userName);
             }
         });
 
@@ -72,18 +72,13 @@ public class AppStartActivity extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("name", userName);
-            RegisterServerSS register = new RegisterServerSS(urlTail, jsonObject.toString(), this, METHOD_POST);
+            RegisterServerSS register = new RegisterServerSS(urlTail, jsonObject.toString(), this, ServerSS.METHOD_POST);
             register.execute(getString(R.string.SERVER_URL) + urlTail);//AsyncTask 시작시킴
         } catch (JSONException e) {
             Log.d("tink-exception", "json exception");
             e.printStackTrace();
         }
 
-    }
-
-    public void doTest(String urlTail, String userName) {
-        TempServerSS temp = new TempServerSS(urlTail, userName, this, METHOD_POST);
-        temp.execute(getString(R.string.SERVER_URL) + urlTail);
     }
 
     public void doGetTest(String urlTail) {
@@ -130,121 +125,5 @@ public class AppStartActivity extends AppCompatActivity {
             setServerTestTextView(result);
         }
     }
-
-    class TempServerSS extends AsyncTask<String, String, String> {
-
-        int METHOD_GET = 0;
-        int METHOD_POST = 1;
-
-        String urlTail;
-        String stringData;
-        Activity context;
-        int method;
-
-        public TempServerSS(String urlTail, String stringData, Activity context, int method) {
-            this.urlTail = urlTail;
-            this.stringData = stringData;
-            this.context= context;
-            this.method = method;
-        }
-
-        @Override
-        public String doInBackground(String... urls) {
-            try {
-                userName = stringData;
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.accumulate("name", userName);
-
-                HttpURLConnection con = null;
-                BufferedReader reader = null;
-
-                try{
-                    URL url = new URL(context.getString(R.string.SERVER_URL) + urlTail);
-                    //연결을 함
-                    con = (HttpURLConnection) url.openConnection();
-
-                    if (method == METHOD_POST) {
-                        con.setRequestMethod("POST");
-                        con.setRequestProperty("Cache-Control", "no-cache");//캐시 설정
-                        con.setRequestProperty("Content-Type", "application/json");//application JSON 형식으로 전송
-                        con.setRequestProperty("Accept", "text/html");//서버에 response 데이터를 html로 받음
-                        con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
-                        con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
-                    }
-                    con.connect();
-
-                    if (method == METHOD_POST) {
-                        //서버로 보내기위해서 스트림 만듬
-                        OutputStream outStream = con.getOutputStream();
-                        //버퍼를 생성하고 넣음
-                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
-                        writer.write(jsonObject.toString());
-                        writer.flush();
-                        writer.close();//버퍼를 닫아줌
-                    }
-
-                    //get data from server
-                    InputStream stream = con.getInputStream();
-
-                    reader = new BufferedReader(new InputStreamReader(stream));
-
-                    StringBuffer buffer = new StringBuffer();
-
-                    String line = "";
-                    while((line = reader.readLine()) != null){
-                        buffer.append(line);
-                    }
-
-                    return buffer.toString();//test1.js// res.end("Server connected to Android!");
-
-                } catch (MalformedURLException e){
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if(con != null){
-                        con.disconnect();
-                    }
-                    try {
-                        if(reader != null){
-                            reader.close();//버퍼를 닫아줌
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-
-
-        //doInBackground메소드가 끝나면 호출됨
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            try {
-                JSONArray jsonArray = new JSONArray(result);
-                String[] names = new String[jsonArray.length()];
-                for (int i=0; i<jsonArray.length(); i++) {
-                    names[i] = jsonArray.getJSONObject(i).getString("name");
-                }
-                setServerTestTextView(names[0] + "  and  "+names[1]);
-            }
-            catch (JSONException e) {
-                Log.d("tink-exception", "json exception");
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-
-
-
-
 }
 
