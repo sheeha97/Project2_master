@@ -1,6 +1,7 @@
 package com.example.q.project2_master.Activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.AsyncTasks.SendPost;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     userName = nameInput.getText().toString();
-                    if (userName == "") {
+                    if (userName.equals("")) {
                         return;
                     }
                     SharedPreferences sf = getSharedPreferences(preferenceName, requestCode);
@@ -85,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("user_name_preference", userName); // 입력
                     editor.commit(); // 파일에 최종 반영함
 
+                    String userNameJsonString = "{\"name\""+":"+"\""+userName+"\"}";
+                    try {
+                        JSONArray jsonArray = new JSONArray(userNameJsonString);
+
+                    }
+                    catch (JSONException e) {
+                        Log.d("tink-exception", "json exception");
+                        e.printStackTrace();
+                    }
                     intentToAppstartActivity(userName);
                 }
             });
@@ -111,4 +125,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }

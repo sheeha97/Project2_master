@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import com.example.q.project2_master.R;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -24,12 +25,14 @@ public class SendPost extends AsyncTask<String, String, String> {
     String urlTail;
     String stringData;
     Activity context;
+    JSONArray jsonArray;
     //Method doOnPostExecute;
 
-    public SendPost(String urlTail, String stringData, Activity context) {
+    public SendPost(String urlTail, String stringData, Activity context, JSONArray jsonArray) {
         this.urlTail = urlTail;
         this.stringData = stringData;
         this.context= context;
+        this.jsonArray = jsonArray;
         //this.doOnPostExecute = doOnPostExecute;
     }
 
@@ -37,8 +40,9 @@ public class SendPost extends AsyncTask<String, String, String> {
     public String doInBackground(String... urls) {
         try {
             //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+            /*
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("user_name_post", stringData); //TODO: [name:"user_name_post"] needs to be fixed to a variable
+            jsonObject.accumulate("user_name_post", stringData); //TODO: [name:"user_name_post"] needs to be fixed to a variable */
 
             HttpURLConnection con = null;
             BufferedReader reader = null;
@@ -61,7 +65,7 @@ public class SendPost extends AsyncTask<String, String, String> {
                 OutputStream outStream = con.getOutputStream();
                 //버퍼를 생성하고 넣음
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
-                writer.write(jsonObject.toString());
+                writer.write(jsonArray.toString());
                 writer.flush();
                 writer.close();//버퍼를 닫아줌
 
