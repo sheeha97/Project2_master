@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.R;
 
 import org.json.JSONArray;
@@ -34,9 +35,14 @@ import com.example.q.project2_master.AsyncTasks.SendPost;
 //TODO: 여기서 back버튼 누르면 빈화면 뜸
 
 public class AppStartActivity extends AppCompatActivity {
+
+    int METHOD_GET = 0;
+    int METHOD_POST = 1;
+
+
     TextView serverTestTextView;
     String userName;
-    Button sendpostBtn;
+    Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,29 +54,37 @@ public class AppStartActivity extends AppCompatActivity {
         textView.setText(userName);
 
         serverTestTextView= findViewById(R.id.server_test_textview);
-        sendpostBtn = findViewById(R.id.send_post_button);
-        String urlTail = "/test1_post";
-        final TestSendPost sendPost = new TestSendPost(urlTail, userName, this);
-        sendpostBtn.setOnClickListener(new View.OnClickListener() {
+        registerBtn = findViewById(R.id.register_button);
+        final String urlTail = "/register";
+
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String urlTail = "/test1_post";
-                sendPost.execute(getString(R.string.SERVER_URL) + urlTail);//AsyncTask 시작시킴
+                //doRegister(urlTail, userName);
+                doGetTest("/get_test");
             }
         });
 
+    }
+
+    public void doRegister(String urlTail, String userName) {
+        RegisterServerSS register = new RegisterServerSS(urlTail, userName, this, METHOD_POST);
+        register.execute(getString(R.string.SERVER_URL) + urlTail);//AsyncTask 시작시킴
+    }
+
+    public void doGetTest(String urlTail) {
+        GetServerSS getss = new GetServerSS(urlTail, "", this, METHOD_GET);
+        getss.execute(getString(R.string.SERVER_URL) + urlTail);
     }
 
     public void setServerTestTextView(String text){
         serverTestTextView.setText(text);
     }
 
-    class TestSendPost extends SendPost{
-
-        public TestSendPost(String urlTail, String stringData, Activity context) {
-            super(urlTail, stringData, context);
+    class RegisterServerSS extends ServerSS {
+        public RegisterServerSS(String urlTail, String stringData, Activity context, int method) {
+            super(urlTail, stringData, context, method);
         }
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -88,6 +102,21 @@ public class AppStartActivity extends AppCompatActivity {
             }
         }
     }
+
+    class GetServerSS extends ServerSS {
+        public GetServerSS(String urlTail, String stringData, Activity context, int method) {
+            super(urlTail, stringData, context, method);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            setServerTestTextView(result);
+        }
+    }
+
+
+
 
 }
 

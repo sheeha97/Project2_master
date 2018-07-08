@@ -19,6 +19,7 @@ import com.example.q.project2_master.AsyncTasks.SendPost;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String userNameJsonString = "{\"name\""+":"+"\""+userName+"\"}";
                     try {
-                        JSONArray jsonArray = new JSONArray(userNameJsonString);
+                        JSONObject userNameJsonObject = new JSONObject(userNameJsonString);
 
                     }
                     catch (JSONException e) {
