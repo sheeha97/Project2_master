@@ -41,7 +41,7 @@ public class AppStartActivity extends AppCompatActivity {
 
 
     TextView serverTestTextView;
-    String userName;
+    public static String userName;
     Button registerBtn;
 
     @Override

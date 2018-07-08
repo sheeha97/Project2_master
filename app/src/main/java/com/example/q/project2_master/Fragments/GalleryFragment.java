@@ -80,4 +80,8 @@ public class GalleryFragment extends Fragment{
         imageCursor.close();
         return;
     }
+
+
+
+
 }
