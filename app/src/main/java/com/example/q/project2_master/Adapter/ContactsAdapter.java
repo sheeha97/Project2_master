@@ -13,8 +13,11 @@ import com.example.q.project2_master.Activities.AppStartActivity;
 import com.example.q.project2_master.Activities.PersonsInfoActivity;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
 
 import java.util.List;
+
+import static com.example.q.project2_master.Utils.JsonUtils.toJSon;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>{
 
@@ -59,7 +62,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 intent.putExtras(bundle);
                 view.getContext().startActivity(intent);*/
                 ContactsModel person = new ContactsModel(AppStartActivity.userName, contact_name.getText().toString(), contact_number.getText().toString());
-
+                String jsonString = JsonUtils.toJSon(person);
 
 
 
