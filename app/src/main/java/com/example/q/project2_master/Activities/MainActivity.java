@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.VIBRATE,
             Manifest.permission.INTERNET  };
 
-    private int requestCode= 0;
+    //private int requestCode= 0;
     private EditText nameInput;
     private Button confirmBtn;
     private TextView duplicateTextView;
-    private String preferenceName = "user_name_saver";
-    String userName;
+    //private String preferenceName = "user_name_saver";
+    public static String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this,
                     PERMISSIONS,
-                    requestCode); }
+                    0); }
         else {
             doOncreate();
         }
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doOncreate() {
-        SharedPreferences sf = getSharedPreferences(preferenceName, requestCode);
+        SharedPreferences sf = getSharedPreferences("user_name_saver", 0);
         String savedUserName = sf.getString("user_name_preference", "");
         //if (savedUserName.equals("")) {
         if (true) {
@@ -91,26 +91,26 @@ public class MainActivity extends AppCompatActivity {
                     if (userName.equals("")) {
                         return;
                     }
-                    SharedPreferences sf = getSharedPreferences(preferenceName, requestCode);
+                    SharedPreferences sf = getSharedPreferences("user_name_saver", 0);
                     SharedPreferences.Editor editor = sf.edit();//저장하려면 editor가 필요
                     editor.putString("user_name_preference", userName); // 입력
                     editor.commit(); // 파일에 최종 반영함
 
                     doRegister("/register", userName);
-                    //intentToAppstartActivity(userName);
+                    //intentToTab3Activity(userName);
                 }
             });
 
         } else {
             Log.d("tink_main", savedUserName);
             userName = savedUserName;
-            intentToAppstartActivity(userName);
+            intentToTab3Activity();
         }
     }
 
-    public void intentToAppstartActivity(String passedUserName) {
-        Intent appStartIntent = new Intent(MainActivity.this, AppStartActivity.class);
-        appStartIntent.putExtra("user_name", passedUserName);
+    public void intentToTab3Activity() {
+        Intent appStartIntent = new Intent(MainActivity.this, Tab3Activity.class);
+        //appStartIntent.putExtra("user_name", passedUserName);
         startActivity(appStartIntent);
     }
 
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getBoolean("valid")) {
-                        intentToAppstartActivity(this.userName);
+                        intentToTab3Activity();
                     } else {
                         duplicateTextView.setText("Duplicate name! Please type another name.");
                     }
