@@ -1,9 +1,7 @@
 package com.example.q.project2_master.Fragments;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -36,7 +34,6 @@ import java.util.List;
 public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private View v;
-    private View v2;
     private TextView resultText;
 
     private RecyclerView recyclerView;
