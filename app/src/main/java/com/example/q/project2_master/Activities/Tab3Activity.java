@@ -11,13 +11,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.q.project2_master.Adapter.ViewPagerAdapter;
 import com.example.q.project2_master.Fragments.ContactsFragment;
@@ -96,5 +96,6 @@ public class Tab3Activity extends AppCompatActivity{
             }
         }
     }
+
 
 }
