@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     class RegisterServerSS extends ServerSS {
         String userName;
-        public RegisterServerSS(String urlTail, String stringData, Activity context, int method, String userName) {
+        public RegisterServerSS(String urlTail, String stringData, Context context, int method, String userName) {
             super(urlTail, stringData, context, method);
             this.userName = userName;
         }

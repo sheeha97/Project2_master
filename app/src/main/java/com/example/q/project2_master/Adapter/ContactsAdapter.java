@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.q.project2_master.Activities.AppStartActivity;
 import com.example.q.project2_master.Activities.MainActivity;
@@ -27,13 +29,16 @@ import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
 import com.example.q.project2_master.Utils.JsonUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import static com.example.q.project2_master.Utils.JsonUtils.toJSon;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>{
 
-    private String userName;
+    //private String userName;
     private Context mContext;
     private LayoutInflater inflater;
     private List<ContactsModel> mListContacts;
@@ -80,12 +85,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 /*SharedPreferences sf = mContext.getSharedPreferences("user_name_saver", 0);
                 userName = sf.getString("user_name_preference", "");*/  //TODO: maybe MainActivity.userName can be replaced by this??
 
-                //Open dialog
-                openDialog();
+
 
                 //Create jsonString
                 ContactsModel person = new ContactsModel(MainActivity.userName, contact_name.getText().toString(), contact_number.getText().toString());
                 String jsonString = JsonUtils.toJSon(person);
+
+                //Open dialog
+                openDialog(jsonString);
 
 
 
@@ -110,15 +117,43 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     }
 
     class ShareContactServerSS extends ServerSS {
-        public ShareContactServerSS(String urlTail, String stringData, Activity context, int method) {
+        //String userName;
+        AlertDialog dialog;
+        public ShareContactServerSS(String urlTail, String stringData, Context context, int method, AlertDialog dialog) {
             super(urlTail, stringData, context, method);
+            this.dialog = dialog;
+
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            String toastText;
+            if (result == null) {
+                toastText = "network error!";
+            } else {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    if (!jsonObject.getBoolean("server_success")) {
+                        toastText = "Sorry, database error.";
+                    } else if (!jsonObject.getBoolean("upload_success")) {
+                        toastText = "You are an undefined user!";
+                    } else {
+                        toastText = "contact uploaded to server!";
+                    }
+                } catch (JSONException e) {
+                    Log.d("tink-exception", "json exception");
+                    toastText = "sorry, json error.";
+                    e.printStackTrace();
+                }
+            }
+            Toast.makeText(this.context, toastText, Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         }
     }
 
     //will see if i wanna create a new class for this
-    public void openDialog() {
+    public void openDialog(final String jsonString) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+        final AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
 
         // Set Custom Title
         TextView title = new TextView(mContext);
@@ -142,19 +177,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         // you can more buttons
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // Gotta do something fancy here @.@
-
-
-                //fill out the blank
-
-
-
+                String urlTail = "/share_contact";
+                ShareContactServerSS scSS = new ShareContactServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST, alertDialog);
+                scSS.execute(mContext.getString(R.string.SERVER_URL) + urlTail);
             }
         });
 
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,"CANCEL", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // do nothing
+                alertDialog.dismiss();
             }
         });
 

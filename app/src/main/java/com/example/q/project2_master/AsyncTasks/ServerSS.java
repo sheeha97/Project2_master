@@ -1,6 +1,7 @@
 package com.example.q.project2_master.AsyncTasks;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.q.project2_master.R;
@@ -29,10 +30,10 @@ public class ServerSS extends AsyncTask<String, String, String> {
 
     String urlTail;
     String stringData;
-    Activity context;
+    public static Context context;
     int method;
 
-    public ServerSS(String urlTail, String stringData, Activity context, int method) {
+    public ServerSS(String urlTail, String stringData, Context context, int method) {
         this.urlTail = urlTail;
         this.stringData = stringData;
         this.context= context;

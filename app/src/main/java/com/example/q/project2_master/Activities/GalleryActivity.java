@@ -1,5 +1,6 @@
 package com.example.q.project2_master.Activities;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,13 +9,19 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.PhotoView.PhotoView;
 import com.example.q.project2_master.R;
 import com.example.q.project2_master.Utils.JsonUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -54,6 +61,36 @@ public class GalleryActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    class ImgUploadServerSS extends ServerSS {
+        public ImgUploadServerSS(String urlTail, String stringData, Context context, int method) {
+            super(urlTail, stringData, context, method);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            String toastText;
+            if (result == null) {
+                toastText = "network error!";
+            } else {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    if (!jsonObject.getBoolean("server_success")) {
+                        toastText = "Sorry, database error.";
+                    } else if (!jsonObject.getBoolean("upload_success")) {
+                        toastText = "You are an undefined user!";
+                    } else {
+                        toastText = "contact uploaded to server!";
+                    }
+                } catch (JSONException e) {
+                    Log.d("tink-exception", "json exception");
+                    toastText = "sorry, json error.";
+                    e.printStackTrace();
+                }
+            }
+            Toast.makeText(this.context, toastText, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
