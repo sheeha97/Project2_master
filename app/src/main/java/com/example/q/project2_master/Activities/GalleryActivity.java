@@ -49,7 +49,7 @@ public class GalleryActivity extends AppCompatActivity{
 
                     String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
                     String jsonString = JsonUtils.toJSon(MainActivity.userName, encodedImage);
-
+                    //do sharing
                 }
             }
         });
