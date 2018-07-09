@@ -34,13 +34,13 @@
 
     </RelativeLayout>
 
-    <com.example.q.first_project.HackyViewPager
+    <com.example.q.project2_master.Utils.HackyViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="420dp"
         android:background="@android:color/white">
 
-    </com.example.q.first_project.HackyViewPager>
+    </com.example.q.project2_master.Utils.HackyViewPager>
 
     <Button
         android:id="@+id/button"

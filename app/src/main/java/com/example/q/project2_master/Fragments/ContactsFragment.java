@@ -138,6 +138,8 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //fill out if user did type out a name :D
+                        //
+
                     }
                 })
                 .setNegativeButton("Cancel",
