@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.R;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private int requestCode= 0;
     private EditText nameInput;
     private Button confirmBtn;
+    private TextView duplicateTextView;
     private String preferenceName = "user_name_saver";
     String userName;
 
@@ -75,11 +77,13 @@ public class MainActivity extends AppCompatActivity {
     public void doOncreate() {
         SharedPreferences sf = getSharedPreferences(preferenceName, requestCode);
         String savedUserName = sf.getString("user_name_preference", "");
-        if (savedUserName == "") {
+        //if (savedUserName.equals("")) {
+        if (true) {
             Log.d("tink_main", "no saved username");
             setContentView(R.layout.activity_main);
             nameInput = (EditText) findViewById(R.id.name_input);
             confirmBtn = (Button) findViewById(R.id.confirm_button);
+            duplicateTextView = findViewById(R.id.duplicate_textview);
             confirmBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     //intentToAppstartActivity(userName);
                 }
             });
+
         } else {
             Log.d("tink_main", savedUserName);
             userName = savedUserName;
@@ -127,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             RegisterServerSS register = new RegisterServerSS(urlTail, jsonObject.toString(), this, ServerSS.METHOD_POST, userName);
             register.execute(getString(R.string.SERVER_URL) + urlTail);//AsyncTask 시작시킴
         } catch (JSONException e) {
-            Log.d("tink-exception", "json exception");
+            Log.d("tink-exception", "json request exception");
             e.printStackTrace();
         }
 
@@ -142,8 +147,25 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("registered", result);
-            intentToAppstartActivity(this.userName);
+            //Log.d("registered", result);
+            //if (result.equals(""))
+            if (result != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    if (jsonObject.getBoolean("valid")) {
+                        intentToAppstartActivity(this.userName);
+                    } else {
+                        duplicateTextView.setText("Duplicate name! Please type another name.");
+                    }
+                } catch (JSONException e) {
+                    Log.d("tink-exception", "json response exception");
+                    e.printStackTrace();
+                }
+            }
+            else {
+                duplicateTextView.setText("Network Error!");
+            }
+
         }
     }
 

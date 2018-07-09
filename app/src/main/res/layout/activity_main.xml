@@ -8,11 +8,16 @@
         android:id="@+id/name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="name"/>
+        android:hint="type your name and confirm to register"/>
     <Button
         android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text = "confirm"/>
+
+    <TextView
+        android:id="@+id/duplicate_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
