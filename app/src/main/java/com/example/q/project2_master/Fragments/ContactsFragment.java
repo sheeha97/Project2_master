@@ -29,7 +29,6 @@ import com.example.q.project2_master.Activities.MainActivity;
 import com.example.q.project2_master.Adapter.ContactsAdapter;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
-import com.example.q.project2_master.Utils.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +68,7 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_green_dark),getResources().getColor(android.R.color.holo_red_dark)
                 ,getResources().getColor(android.R.color.holo_blue_dark),getResources().getColor(android.R.color.holo_orange_dark) );
 
-        FloatingActionButton fab = v.findViewById(R.id.add_button);
+        FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
