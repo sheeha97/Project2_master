@@ -3,10 +3,13 @@ package com.example.q.project2_master.AsyncTasks;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.q.project2_master.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -115,6 +118,29 @@ public class ServerSS extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
+    }
+
+    public void handleUploadResponse(String result) {
+        String toastText;
+        if (result == null) {
+            toastText = "network error!";
+        } else {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                if (!jsonObject.getBoolean("server_success")) {
+                    toastText = "Sorry, database error.";
+                } else if (!jsonObject.getBoolean("upload_success")) {
+                    toastText = "You are an undefined user!";
+                } else {
+                    toastText = "contact uploaded to server!";
+                }
+            } catch (JSONException e) {
+                Log.d("tink-exception", "json exception");
+                toastText = "sorry, json error.";
+                e.printStackTrace();
+            }
+        }
+        Toast.makeText(this.context, toastText, Toast.LENGTH_SHORT).show();
     }
 
 }

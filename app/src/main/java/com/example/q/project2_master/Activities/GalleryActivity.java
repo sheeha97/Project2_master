@@ -30,6 +30,8 @@ import java.util.ArrayList;
 public class GalleryActivity extends AppCompatActivity{
 
     private ArrayList<String> paths;
+    Context mContext = this;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,9 @@ public class GalleryActivity extends AppCompatActivity{
                     String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
                     String jsonString = JsonUtils.toJSon(MainActivity.userName, encodedImage);
                     //do sharing
+                    String urlTail = "/upload_img";
+                    ImgUploadServerSS iuSS  = new ImgUploadServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST);
+                    iuSS.execute(getString(R.string.SERVER_URL) + urlTail);
                 }
             }
         });
@@ -70,26 +75,7 @@ public class GalleryActivity extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(String result) {
-            String toastText;
-            if (result == null) {
-                toastText = "network error!";
-            } else {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    if (!jsonObject.getBoolean("server_success")) {
-                        toastText = "Sorry, database error.";
-                    } else if (!jsonObject.getBoolean("upload_success")) {
-                        toastText = "You are an undefined user!";
-                    } else {
-                        toastText = "contact uploaded to server!";
-                    }
-                } catch (JSONException e) {
-                    Log.d("tink-exception", "json exception");
-                    toastText = "sorry, json error.";
-                    e.printStackTrace();
-                }
-            }
-            Toast.makeText(this.context, toastText, Toast.LENGTH_SHORT).show();
+            this.handleUploadResponse(result);
         }
     }
 
