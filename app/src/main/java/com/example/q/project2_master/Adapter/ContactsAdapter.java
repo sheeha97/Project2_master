@@ -9,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.q.project2_master.Activities.AppStartActivity;
 import com.example.q.project2_master.Activities.PersonsInfoActivity;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
 
 import java.util.List;
+
+import static com.example.q.project2_master.Utils.JsonUtils.toJSon;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>{
 
@@ -37,27 +41,31 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final TextView contact_name, contact_number, contact_number2;
+        final TextView contact_name, contact_number;
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
-        contact_number2 = holder.contact_number2;
 
-        contact_name.setText(mListContacts.get(position).getName());
+        contact_name.setText(mListContacts.get(position).getContactName());
         contact_number.setText(mListContacts.get(position).getNumber());
-        contact_number2.setText(mListContacts.get(position).getNumber2());
+
 
         holder.itemView.setClickable(true);
         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), PersonsInfoActivity.class);
+                /*Intent intent = new Intent(view.getContext(), PersonsInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", contact_name.getText().toString());
                 bundle.putString("number", contact_number.getText().toString());
                 bundle.putString("number2", contact_number2.getText().toString());
                 intent.putExtras(bundle);
-                view.getContext().startActivity(intent);
+                view.getContext().startActivity(intent);*/
+                ContactsModel person = new ContactsModel(AppStartActivity.userName, contact_name.getText().toString(), contact_number.getText().toString());
+                String jsonString = JsonUtils.toJSon(person);
+
+
+
             }
         });
     }

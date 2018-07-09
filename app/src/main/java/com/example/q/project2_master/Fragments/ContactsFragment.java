@@ -49,8 +49,6 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
         recyclerView.setLayoutManager(layoutManager);
         ContactsAdapter adapter = new ContactsAdapter(getContext(), getContacts());
 
-        String jsonFile = JsonUtils.toJSon(getContacts());
-
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = v.findViewById(R.id.swipe_refresh_layout);
