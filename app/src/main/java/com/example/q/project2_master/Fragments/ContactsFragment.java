@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.q.project2_master.Activities.MainActivity;
 import com.example.q.project2_master.Adapter.ContactsAdapter;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
@@ -97,8 +98,8 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
                 }
             }
 
-            list.add(new ContactsModel(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
-                    mobile, home));
+            list.add(new ContactsModel(MainActivity.userName,cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+                    mobile));
 
 
         }
