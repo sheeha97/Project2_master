@@ -18,7 +18,7 @@ public class JsonUtils {
             JSONObject jsonObj = new JSONObject();
 
 
-            jsonObj.put("name", person.getUserName());
+            jsonObj.put("user_name", person.getUserName());
             jsonObj.put("contact_name", person.getContactName()); // Set the first name/pair
             jsonObj.put("contact_number", person.getNumber());
 

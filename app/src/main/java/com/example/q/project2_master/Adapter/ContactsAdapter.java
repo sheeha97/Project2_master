@@ -2,7 +2,9 @@ package com.example.q.project2_master.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.q.project2_master.Activities.AppStartActivity;
+import com.example.q.project2_master.Activities.MainActivity;
 import com.example.q.project2_master.Activities.PersonsInfoActivity;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
@@ -21,12 +24,14 @@ import static com.example.q.project2_master.Utils.JsonUtils.toJSon;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>{
 
+    private String userName;
     private Context mContext;
     private LayoutInflater inflater;
     private List<ContactsModel> mListContacts;
     public ContactsAdapter (Context context, List<ContactsModel> listContacts) {
         mContext = context;
         mListContacts = listContacts;
+
     }
 
     @Override
@@ -61,7 +66,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 bundle.putString("number2", contact_number2.getText().toString());
                 intent.putExtras(bundle);
                 view.getContext().startActivity(intent);*/
-                ContactsModel person = new ContactsModel(AppStartActivity.userName, contact_name.getText().toString(), contact_number.getText().toString());
+
+
+                /*SharedPreferences sf = mContext.getSharedPreferences("user_name_saver", 0);
+                userName = sf.getString("user_name_preference", "");*/  //TODO: maybe MainActivity.userName can be replaced by this??
+                ContactsModel person = new ContactsModel(MainActivity.userName, contact_name.getText().toString(), contact_number.getText().toString());
                 String jsonString = JsonUtils.toJSon(person);
 
 

@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.AppStartActivity"></activity>
+        <activity android:name=".Activities.Tab3Activity"></activity>
     </application>
 
 </manifest>

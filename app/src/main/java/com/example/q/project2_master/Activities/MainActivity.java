@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     public void doRegister(String urlTail, String userName) {
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("name", userName);
+            jsonObject.accumulate("user_name", userName);
             RegisterServerSS register = new RegisterServerSS(urlTail, jsonObject.toString(), this, ServerSS.METHOD_POST, userName);
             register.execute(getString(R.string.SERVER_URL) + urlTail);//AsyncTask 시작시킴
         } catch (JSONException e) {
