@@ -1,5 +1,6 @@
 package com.example.q.project2_master.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.example.q.project2_master.Activities.AppStartActivity;
 import com.example.q.project2_master.Activities.MainActivity;
 import com.example.q.project2_master.Activities.PersonsInfoActivity;
+import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
 import com.example.q.project2_master.Utils.JsonUtils;
@@ -93,6 +95,12 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             contact_number2 = itemView.findViewById(R.id.contact_number2);
         }
 
+    }
+
+    class ShareContactServerSS extends ServerSS {
+        public ShareContactServerSS(String urlTail, String stringData, Activity context, int method) {
+            super(urlTail, stringData, context, method);
+        }
     }
 
 }
