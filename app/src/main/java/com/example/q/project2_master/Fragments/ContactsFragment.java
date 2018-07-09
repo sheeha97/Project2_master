@@ -192,16 +192,23 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
                     } else if (!jsonObject.getBoolean("contacts_exist")) {
                         toastText = "No contacts found";
                     } else {
-                        toastText = "contacts updated!";
+                        toastText = "contacts downloaded!";
                         try {
                             //contacts updated here
                             JSONArray jsonArray = jsonObject.getJSONArray("contacts");
+                            int len = result.length();
+                            ContactsModel[] contactsModels = new ContactsModel[len];
                             for (int i=0; i<result.length(); i++) {
                                 String contactNumber = jsonArray.getJSONObject(i).getString("contact_number");
                                 ContactsModel contactsModel = new ContactsModel(MainActivity.userName, targetName, contactNumber);
-                                getContacts().add(contactsModel); //TODO: update contact list
+                                contactsModels[i] = contactsModel;
+                                //getContacts().add(contactsModel);
                                 Log.d("contact_number", contactNumber);
                             }
+                            //TODO: contacts in device needs to be updated: by adding downloaded contacts from server.
+                            // now contactsModels(Array) has all contacts from server.
+                            // before adding it to the device contacts, check if there exists contact with duplicate contact_name && contact_number
+                            // and if such contact already exist(satisfying both duplicate condition), don't add it to device.
                         }
                         catch (JSONException e) {
                             Log.d("tink-exception", "json array exception");

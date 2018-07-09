@@ -27,6 +27,7 @@ public class PregameFragment extends Fragment {
         pregameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FragmentManager manager = getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.output, fragment);

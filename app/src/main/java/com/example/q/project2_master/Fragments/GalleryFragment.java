@@ -1,6 +1,7 @@
 package com.example.q.project2_master.Fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -19,9 +20,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.q.project2_master.Activities.MainActivity;
 import com.example.q.project2_master.Adapter.RecyclerPicAdapter;
+import com.example.q.project2_master.AsyncTasks.ServerSS;
+import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -112,18 +122,11 @@ public class GalleryFragment extends Fragment{
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //fill out if user did type out a name :D
-                        //
-
-                        String[] encodedImages;
-                        String user_name = editText.getText().toString();
-
-                        for (int i = 0; i < encodedImages.length; i++) {
-                            byte[] decodedString = Base64.decode(encodedImages[i], Base64.DEFAULT);
-                            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                            saveImage(decodedByte,  user_name + Integer.toString(i));
-                        }
-
+                        String targetName = editText.getText().toString();
+                        String jsonString = JsonUtils.toJSonDownload(targetName);
+                        String urlTail = "/download_images";
+                        DownloadImgsServerSS diSS = new DownloadImgsServerSS(urlTail, jsonString, getContext(), ServerSS.METHOD_POST, targetName);
+                        diSS.execute(getContext().getString(R.string.SERVER_URL) + urlTail);
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -156,6 +159,58 @@ public class GalleryFragment extends Fragment{
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    class DownloadImgsServerSS extends ServerSS {
+        String targetName;
+        public DownloadImgsServerSS(String urlTail, String stringData, Context context, int method, String targetName) {
+            super(urlTail, stringData, context, method);
+            this.targetName = targetName;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            String toastText;
+            if (result == null) {
+                toastText = "network error!";
+            } else {
+                toastText= "Sorry, json error";
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    if (!jsonObject.getBoolean("server_success")) {
+                        toastText = "Sorry, database error.";
+                    } else if (!jsonObject.getBoolean("images_exist")) {
+                        toastText = "No images found";
+                    } else {
+                        toastText = "images downloaded!";
+                        try {
+                            //contacts updated here
+                            int len = result.length();
+                            String[] encodedImages = new String[len];
+                            JSONArray jsonArray = jsonObject.getJSONArray("images");
+                            for (int i=0; i<len; i++) {
+                                String encodedImg = jsonArray.getJSONObject(i).getString("encoded_img");
+                                encodedImages[i] = encodedImg;
+                                Log.d("image", encodedImg.substring(10));
+                            }
+                            for (int i = 0; i < encodedImages.length; i++) {
+                                byte[] decodedString = Base64.decode(encodedImages[i], Base64.DEFAULT);
+                                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                saveImage(decodedByte,  targetName + Integer.toString(i));
+                            }
+                        }
+                        catch (JSONException e) {
+                            Log.d("tink-exception", "json array exception");
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d("tink-exception", "json object exception");
+                    e.printStackTrace();
+                }
+            }
+            Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
         }
     }
 
