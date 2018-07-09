@@ -1,6 +1,7 @@
 package com.example.q.project2_master.Fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +24,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.q.project2_master.Activities.MainActivity;
+import com.example.q.project2_master.Activities.Tab3Activity;
 import com.example.q.project2_master.Adapter.ContactsAdapter;
+import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.Models.ContactsModel;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,8 +148,11 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //fill out if user did type out a name :D
-                        //
-
+                        String targetName = editText.getText().toString();
+                        String urlTail= "/download_contacts";
+                        DownloadContactServerSS dcSS = new DownloadContactServerSS(
+                                urlTail, JsonUtils.toJSonDownload(targetName), getContext(), ServerSS.METHOD_POST, targetName);
+                        dcSS.execute(getString(R.string.SERVER_URL) + urlTail);
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -154,5 +167,53 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
 
+    }
+
+    class DownloadContactServerSS extends ServerSS {
+        String targetName;
+        public DownloadContactServerSS(String urlTail, String stringData, Context context, int method, String targetName) {
+            super(urlTail, stringData, context, method);
+            this.targetName = targetName;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            String toastText;
+            if (result == null) {
+                toastText = "network error!";
+            } else {
+                toastText= "Sorry, json error";
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    if (!jsonObject.getBoolean("server_success")) {
+                        toastText = "Sorry, database error.";
+                    } else if (!jsonObject.getBoolean("contacts_exist")) {
+                        toastText = "No contacts found";
+                    } else {
+                        toastText = "contacts updated!";
+                        try {
+                            //contacts updated here
+                            JSONArray jsonArray = jsonObject.getJSONArray("contacts");
+                            for (int i=0; i<result.length(); i++) {
+                                String contactNumber = jsonArray.getJSONObject(i).getString("contact_number");
+                                ContactsModel contactsModel = new ContactsModel(MainActivity.userName, targetName, contactNumber);
+                                getContacts().add(contactsModel); //TODO: update contact list
+                                Log.d("contact_number", contactNumber);
+                            }
+                        }
+                        catch (JSONException e) {
+                            Log.d("tink-exception", "json array exception");
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.d("tink-exception", "json object exception");
+                    e.printStackTrace();
+                }
+            }
+            Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
+        }
     }
 }

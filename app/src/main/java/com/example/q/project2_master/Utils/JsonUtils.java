@@ -52,4 +52,22 @@ public class JsonUtils {
         return null;
 
     }
+
+    public static String toJSonDownload(String targetName) {
+        try {
+            // Here we convert Java Object to JSON
+            JSONObject jsonObj = new JSONObject();
+
+
+            jsonObj.put("target_name", targetName);
+
+
+            return jsonObj.toString();
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 }

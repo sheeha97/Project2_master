@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
     public void doOncreate() {
         SharedPreferences sf = getSharedPreferences("user_name_saver", 0);
         String savedUserName = sf.getString("user_name_preference", "");
-        if (savedUserName.equals("")) {
-        //if (true) {
+        //if (savedUserName.equals("")) {
+        if (true) {
             Log.d("tink_main", "no saved username");
             setContentView(R.layout.activity_main);
             nameInput = (EditText) findViewById(R.id.name_input);
