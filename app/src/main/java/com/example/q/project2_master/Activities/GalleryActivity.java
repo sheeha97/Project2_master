@@ -7,12 +7,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.q.project2_master.PhotoView.PhotoView;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -24,11 +28,32 @@ public class GalleryActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
         Bundle bundle = getIntent().getExtras();
-        int p = bundle.getInt("image_id");
+        final int p = bundle.getInt("image_id");
         paths = bundle.getStringArrayList("image_path");
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(new SamplePagerAdapter(paths));
         viewPager.setCurrentItem(p);
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //now gotta do something about json file.....shi...
+                File imgFile = new File(paths.get(p));
+                Bitmap bitmap;
+                if (imgFile.exists()) {
+                    bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                    byte[] b = baos.toByteArray();
+
+                    String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+                    String jsonString = JsonUtils.toJSon(MainActivity.userName, encodedImage);
+
+                }
+            }
+        });
+
     }
 
 

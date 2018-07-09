@@ -37,9 +37,19 @@
     <com.example.q.first_project.HackyViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="420dp"
         android:background="@android:color/white">
+
     </com.example.q.first_project.HackyViewPager>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Share"
+        />
 
 </LinearLayout>
 

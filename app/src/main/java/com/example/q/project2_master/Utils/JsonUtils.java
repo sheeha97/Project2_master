@@ -32,4 +32,24 @@ public class JsonUtils {
         return null;
 
     }
+
+    public static String toJSon(String userName, String encodedImg) {
+        try {
+            // Here we convert Java Object to JSON
+            JSONObject jsonObj = new JSONObject();
+
+
+            jsonObj.put("user_name", userName);
+            jsonObj.put("encoded_img", encodedImg);
+
+
+            return jsonObj.toString();
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+
+    }
 }
