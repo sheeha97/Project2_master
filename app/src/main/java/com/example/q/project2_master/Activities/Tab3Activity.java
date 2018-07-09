@@ -18,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.example.q.project2_master.Adapter.ViewPagerAdapter;
 import com.example.q.project2_master.Fragments.ContactsFragment;
