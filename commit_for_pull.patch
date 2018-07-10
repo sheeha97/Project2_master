@@ -1,0 +1,54 @@
+Index: app/src/main/java/com/example/q/project2_master/Activities/MakeroomActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/q/project2_master/Activities/MakeroomActivity.java	(date 1531213014497)
++++ app/src/main/java/com/example/q/project2_master/Activities/MakeroomActivity.java	(date 1531213014497)
+@@ -0,0 +1,6 @@
++package com.example.q.project2_master.Activities;
++
++import android.app.Activity;
++
++public class MakeroomActivity extends Activity {
++}
+Index: app/src/main/java/com/example/q/project2_master/Fragments/GalleryFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/q/project2_master/Fragments/GalleryFragment.java	(revision 6812237b18c732210b02b28a814c88674aaf95b6)
++++ app/src/main/java/com/example/q/project2_master/Fragments/GalleryFragment.java	(date 1531212300191)
+@@ -218,6 +218,7 @@
+                                 saveImage(decodedByte,  targetName + Integer.toString(i));
+                                 Log.d("tink-image", "image saved"); //TODO: 여기 로그까지 찍히고 device 내부저장소에도 들어가는데 gallery 반영 안됨..
+                             }
++
+                         }
+                         catch (JSONException e) {
+                             Log.d("tink-exception", "json array exception");
+@@ -230,7 +231,7 @@
+                 }
+             }
+             Log.d("tink", toastText);
+-            Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
++            Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
+         }
+     }
+ 
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 6812237b18c732210b02b28a814c88674aaf95b6)
++++ app/src/main/AndroidManifest.xml	(date 1531213014518)
+@@ -30,6 +30,7 @@
+         <activity android:name=".Activities.AppStartActivity"></activity>
+         <activity android:name=".Activities.Tab3Activity"></activity>
+         <activity android:name=".Activities.GalleryActivity"></activity>
++        <activity android:name=".Activities.MakeroomActivity"></activity>
+     </application>
+ 
+ </manifest>
+\ No newline at end of file

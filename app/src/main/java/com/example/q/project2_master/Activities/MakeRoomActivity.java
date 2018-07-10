@@ -12,12 +12,16 @@ import android.widget.Toast;
 
 import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.q.project2_master.Utils.JsonUtils.toJSonRedName;
+
 public class MakeRoomActivity extends AppCompatActivity {
     private Button startBtn;
+    private Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,9 @@ public class MakeRoomActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String urlTail = "/make_room";
-                //MakeRoomServerSS mrSS= new MakeRoomServerSS(urlTail, )
+                String jsonString = JsonUtils.toJSonRedName(MainActivity.userName);
+                MakeRoomServerSS mrSS= new MakeRoomServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST);
+                mrSS.execute(mContext.getString(R.string.SERVER_URL) + urlTail);
             }
         });
     }

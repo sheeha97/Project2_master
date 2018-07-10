@@ -76,7 +76,6 @@ public class JsonUtils {
             // Here we convert Java Object to JSON
             JSONObject jsonObj = new JSONObject();
 
-
             jsonObj.put("red_name", redName);
 
 
