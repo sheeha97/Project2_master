@@ -57,6 +57,13 @@ public class Tab3Activity extends AppCompatActivity{
 
     }
 
+    //change activity when clicked
+    public void changeActivity(View view) {
+        Intent intent = new Intent(this, MakeRoomActivity.class);
+        startActivity(intent);
+    }
+
+
     //back presser
     private long pressedTime = 0;
     public interface OnBackPressedListener {

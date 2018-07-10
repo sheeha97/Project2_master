@@ -12,32 +12,26 @@ import android.widget.Button;
 
 import com.example.q.project2_master.R;
 
-public class PregameFragment extends Fragment {
+public class CreateJoinFragment extends Fragment {
+
+
     private View v;
 
-    public PregameFragment() {
-    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_pre_game, container, false);
-        Button pregameButton = v.findViewById(R.id.pregame_button);
-        pregameButton.setOnClickListener(new View.OnClickListener() {
+        v = inflater.inflate(R.layout.fragment_create_join, container, false);
+
+
+        Button joinButton = v.findViewById(R.id.join);
+        joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new CreateJoinFragment();
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.pregame, fragment);
-                transaction.commit();
+
             }
         });
-
-
         return v;
     }
-
-
 }
