@@ -13,6 +13,8 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -40,12 +42,13 @@ import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
 
-public class GalleryFragment extends Fragment{
+public class GalleryFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
     private View v;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<String> thumbsDadaList;
     private ArrayList<String> thumbsIDList;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public GalleryFragment() {
@@ -58,6 +61,7 @@ public class GalleryFragment extends Fragment{
         thumbsIDList = new ArrayList<String>();
         thumbsDadaList = new ArrayList<String>();
 
+
         getThumbInfo(thumbsIDList, thumbsDadaList);
 
         layoutManager = new GridLayoutManager(getContext(), 3);
@@ -69,6 +73,12 @@ public class GalleryFragment extends Fragment{
         RecyclerPicAdapter adapter = new RecyclerPicAdapter(thumbsDadaList, getContext());
 
         recyclerView.setAdapter(adapter);
+
+        swipeRefreshLayout = v.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_green_dark),getResources().getColor(android.R.color.holo_red_dark)
+                ,getResources().getColor(android.R.color.holo_blue_dark),getResources().getColor(android.R.color.holo_orange_dark) );
+
 
         FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -224,7 +234,12 @@ public class GalleryFragment extends Fragment{
         }
     }
 
-
+    @Override
+    public void onRefresh() {
+        FragmentTransaction ft=getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
 
 }
