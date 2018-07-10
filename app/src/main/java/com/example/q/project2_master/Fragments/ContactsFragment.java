@@ -174,7 +174,7 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        public void onPostExecute(String result) {
             super.onPostExecute(result);
 
             String toastText;

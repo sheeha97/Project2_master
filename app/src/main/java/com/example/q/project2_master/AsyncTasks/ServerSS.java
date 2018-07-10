@@ -114,11 +114,6 @@ public class ServerSS extends AsyncTask<String, String, String> {
 
 
 
-    //doInBackground메소드가 끝나면 호출됨
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-    }
 
     public void handleUploadResponse(String result) {
         String toastText;
