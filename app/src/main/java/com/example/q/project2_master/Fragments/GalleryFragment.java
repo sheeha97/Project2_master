@@ -74,7 +74,7 @@ public class GalleryFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
         recyclerView.setAdapter(adapter);
 
-        swipeRefreshLayout = v.findViewById(R.id.swipe_refresh_layout2);
+        swipeRefreshLayout = v.findViewById(R.id.frag_gallery);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(android.R.color.holo_green_dark),getResources().getColor(android.R.color.holo_red_dark)
                 ,getResources().getColor(android.R.color.holo_blue_dark),getResources().getColor(android.R.color.holo_orange_dark) );
