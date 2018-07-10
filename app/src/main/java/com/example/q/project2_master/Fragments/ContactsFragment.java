@@ -1,8 +1,11 @@
 package com.example.q.project2_master.Fragments;
 
 import android.app.AlertDialog;
+import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -204,11 +207,21 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
                                 contactsModels[i] = contactsModel;
                                 //getContacts().add(contactsModel);
                                 Log.d("contact_number", contactNumber);
+                                Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+                                intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+
+                                intent.putExtra(ContactsContract.Intents.Insert.PHONE, contactNumber)
+                                        .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK)
+                                        .putExtra(ContactsContract.Intents.Insert.NAME, targetName);
+
+
                             }
                             //TODO: contacts in device needs to be updated: by adding downloaded contacts from server.
                             // now contactsModels(Array) has all contacts from server.
                             // before adding it to the device contacts, check if there exists contact with duplicate contact_name && contact_number
                             // and if such contact already exist(satisfying both duplicate condition), don't add it to device.
+
+
                         }
                         catch (JSONException e) {
                             Log.d("tink-exception", "json array exception");
@@ -223,4 +236,5 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
             Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
         }
     }
+
 }
