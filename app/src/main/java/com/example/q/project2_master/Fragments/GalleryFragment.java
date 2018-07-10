@@ -51,6 +51,7 @@ public class GalleryFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private SwipeRefreshLayout swipeRefreshLayout;
 
 
+
     public GalleryFragment() {
     }
 

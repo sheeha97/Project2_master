@@ -13,9 +13,12 @@ import android.widget.Toast;
 import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.R;
 import com.example.q.project2_master.Utils.JsonUtils;
+import com.github.nkzawa.socketio.client.IO;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.Socket;
 
 import static com.example.q.project2_master.Utils.JsonUtils.toJSonRedName;
 
@@ -33,6 +36,7 @@ public class MakeRoomActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //String urlTail = "/make_room";
                 String jsonString = JsonUtils.toJSonRedName(MainActivity.userName);
+                Socket mSocket;
 
                 //MakeRoomServerSS mrSS= new MakeRoomServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST);
                 //mrSS.execute(mContext.getString(R.string.SERVER_URL) + urlTail);

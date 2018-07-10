@@ -62,6 +62,9 @@ public class Tab3Activity extends AppCompatActivity{
         Intent intent = new Intent(this, MakeRoomActivity.class);
         startActivity(intent);
     }
+    public void changeToGameActivity(View view) {
+
+    }
 
 
     //back presser
