@@ -1,6 +1,7 @@
 package com.example.q.project2_master.Fragments;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -125,6 +126,7 @@ public class GalleryFragment extends Fragment{
                         String targetName = editText.getText().toString();
                         String jsonString = JsonUtils.toJSonDownload(targetName);
                         String urlTail = "/download_images";
+                        Log.d("tink-dialog", "download_images sent");
                         DownloadImgsServerSS diSS = new DownloadImgsServerSS(urlTail, jsonString, getContext(), ServerSS.METHOD_POST, targetName);
                         diSS.execute(getContext().getString(R.string.SERVER_URL) + urlTail);
                     }
@@ -164,6 +166,7 @@ public class GalleryFragment extends Fragment{
 
     class DownloadImgsServerSS extends ServerSS {
         String targetName;
+        //Context context;
         public DownloadImgsServerSS(String urlTail, String stringData, Context context, int method, String targetName) {
             super(urlTail, stringData, context, method);
             this.targetName = targetName;
@@ -171,33 +174,37 @@ public class GalleryFragment extends Fragment{
 
         @Override
         protected void onPostExecute(String result) {
+
             String toastText;
             if (result == null) {
                 toastText = "network error!";
             } else {
                 toastText= "Sorry, json error";
                 try {
+                    Log.d("tink", "download_images response");
                     JSONObject jsonObject = new JSONObject(result);
                     if (!jsonObject.getBoolean("server_success")) {
                         toastText = "Sorry, database error.";
                     } else if (!jsonObject.getBoolean("images_exist")) {
                         toastText = "No images found";
                     } else {
+                        Log.d("tink", "download_images successful");
                         toastText = "images downloaded!";
                         try {
                             //contacts updated here
-                            int len = result.length();
-                            String[] encodedImages = new String[len];
                             JSONArray jsonArray = jsonObject.getJSONArray("images");
+                            int len = jsonArray.length();
+                            String[] encodedImages = new String[len];
                             for (int i=0; i<len; i++) {
                                 String encodedImg = jsonArray.getJSONObject(i).getString("encoded_img");
                                 encodedImages[i] = encodedImg;
-                                Log.d("image", encodedImg.substring(10));
+                                Log.d("tink-image", encodedImg.substring(0, 10));
                             }
-                            for (int i = 0; i < encodedImages.length; i++) {
+                            for (int i = 0; i < len; i++) {
                                 byte[] decodedString = Base64.decode(encodedImages[i], Base64.DEFAULT);
                                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                                 saveImage(decodedByte,  targetName + Integer.toString(i));
+                                Log.d("tink-image", "image saved"); //TODO: 여기 로그까지 찍히고 device 내부저장소에도 들어가는데 gallery 반영 안됨..
                             }
                         }
                         catch (JSONException e) {
@@ -210,6 +217,7 @@ public class GalleryFragment extends Fragment{
                     e.printStackTrace();
                 }
             }
+            Log.d("tink", toastText);
             Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
         }
     }

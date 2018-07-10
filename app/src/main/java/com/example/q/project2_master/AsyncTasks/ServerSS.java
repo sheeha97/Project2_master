@@ -132,7 +132,7 @@ public class ServerSS extends AsyncTask<String, String, String> {
                 } else if (!jsonObject.getBoolean("upload_success")) {
                     toastText = "You are an undefined user!";
                 } else {
-                    toastText = "contact uploaded to server!";
+                    toastText = "uploaded to server!";
                 }
             } catch (JSONException e) {
                 Log.d("tink-exception", "json exception");
