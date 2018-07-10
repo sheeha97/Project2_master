@@ -31,7 +31,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="201dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -42,7 +42,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="59dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 tools:ignore="RtlCompat" />
 
@@ -54,7 +54,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="142dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -65,7 +65,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="226dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -76,7 +76,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="287dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -87,7 +87,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="102dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -97,7 +97,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
         </RelativeLayout>
@@ -117,7 +117,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="199dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -128,7 +128,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="287dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -139,7 +139,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="226dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -149,7 +149,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="102dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -161,7 +161,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="59dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -172,7 +172,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="143dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -181,7 +181,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
         </RelativeLayout>
 
@@ -198,7 +198,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="103dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -210,7 +210,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="199dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -221,7 +221,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="288dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -231,7 +231,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="227dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -243,7 +243,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="142dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -253,7 +253,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="59dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -263,7 +263,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
         </RelativeLayout>
 
@@ -280,7 +280,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="105dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -291,7 +291,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="199dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -302,7 +302,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="59dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -313,7 +313,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="142dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -324,7 +324,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="226dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -335,7 +335,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="287dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -345,7 +345,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
         </RelativeLayout>
 
@@ -362,7 +362,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="99dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -373,7 +373,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="196dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -384,7 +384,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="227dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -395,7 +395,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="285dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -406,7 +406,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="60dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -417,7 +417,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="141dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -427,7 +427,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
         </RelativeLayout>
 
@@ -444,7 +444,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="99dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -455,7 +455,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="196dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -466,7 +466,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="284dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -477,7 +477,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="140dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -488,7 +488,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="227dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -499,7 +499,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="59dp"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp"
                 android:layout_alignParentLeft="true" />
 
@@ -509,7 +509,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/yellow"
+                android:src="@drawable/white"
                 app:civ_border_width="2dp" />
         </RelativeLayout>
 
