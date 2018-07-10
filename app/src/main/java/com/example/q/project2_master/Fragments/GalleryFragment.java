@@ -217,6 +217,7 @@ public class GalleryFragment extends Fragment implements SwipeRefreshLayout.OnRe
                                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                                 saveImage(decodedByte,  targetName + Integer.toString(i));
                                 Log.d("tink-image", "image saved"); //TODO: 여기 로그까지 찍히고 device 내부저장소에도 들어가는데 gallery 반영 안됨..
+
                             }
                         }
                         catch (JSONException e) {
@@ -230,7 +231,7 @@ public class GalleryFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 }
             }
             Log.d("tink", toastText);
-            Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
         }
     }
 

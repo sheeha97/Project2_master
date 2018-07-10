@@ -30,6 +30,7 @@
         <activity android:name=".Activities.AppStartActivity"></activity>
         <activity android:name=".Activities.Tab3Activity"></activity>
         <activity android:name=".Activities.GalleryActivity"></activity>
+        <activity android:name=".Activities.MakeRoomActivity"></activity>
     </application>
 
 </manifest>

@@ -70,4 +70,22 @@ public class JsonUtils {
 
         return null;
     }
+
+    public static String toJSonRedName(String redName) {
+        try {
+            // Here we convert Java Object to JSON
+            JSONObject jsonObj = new JSONObject();
+
+
+            jsonObj.put("red_name", redName);
+
+
+            return jsonObj.toString();
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 }
