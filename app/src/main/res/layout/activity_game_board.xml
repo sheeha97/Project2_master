@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1"
+    android:orientation="vertical"
+    android:id="@+id/categorias_table"
+    android:background="@color/design_default_color_primary"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="top|center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid13"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="201dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid37"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="59dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                tools:ignore="RtlCompat" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid31"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="142dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid25"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="226dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid19"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="287dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid7"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="102dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/grid1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="top|center">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/grid14"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="199dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid20"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="287dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid26"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="226dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid8"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="102dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid38"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="59dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid32"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="143dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="top|center">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/grid9"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="103dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid15"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="199dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid21"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="288dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid27"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="227dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid33"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="142dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid39"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="59dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="top|center">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/grid10"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="105dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid16"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="199dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid40"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="59dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid34"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="142dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid28"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="226dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid22"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="287dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="top|center">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/grid11"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="99dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid17"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="196dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid29"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="227dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid23"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="285dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid41"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="60dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid35"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="141dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="top|center">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/grid12"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="99dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid18"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="196dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid24"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="284dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid36"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="140dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid30"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="227dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid42"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="59dp"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp"
+                android:layout_alignParentLeft="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/grid6"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/yellow"
+                app:civ_border_width="2dp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
