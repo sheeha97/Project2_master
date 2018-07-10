@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.q.project2_master.AsyncTasks.ServerSS;
+import com.example.q.project2_master.GlobalObject;
 import com.example.q.project2_master.R;
 import com.example.q.project2_master.Utils.JsonUtils;
 import com.github.nkzawa.socketio.client.IO;
@@ -25,6 +26,9 @@ import static com.example.q.project2_master.Utils.JsonUtils.toJSonRedName;
 public class MakeRoomActivity extends AppCompatActivity {
     private Button startBtn;
     private Context mContext = this;
+    String SERVER_URL = getString(R.string.SERVER_URL);
+    com.github.nkzawa.socketio.client.Socket mSocket;
+    GlobalObject go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,46 +38,14 @@ public class MakeRoomActivity extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String urlTail = "/make_room";
-                String jsonString = JsonUtils.toJSonRedName(MainActivity.userName);
-                Socket mSocket;
+                go.connectSocket();
+                mSocket = go.getSocket();
+                String userName = MainActivity.userName;
 
-                //MakeRoomServerSS mrSS= new MakeRoomServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST);
-                //mrSS.execute(mContext.getString(R.string.SERVER_URL) + urlTail);
+
+
             }
         });
     }
 
-    /*
-    class MakeRoomServerSS extends ServerSS {
-        public MakeRoomServerSS(String urlTail, String stringData, Context context, int method) {
-            super(urlTail, stringData, context, method);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            String toastText;
-            if (result == null) {
-                toastText = "network error!";
-            } else {
-                toastText = "json error!";
-                try {
-                    Log.d("tink", "make_room response");
-                    JSONObject jsonObject = new JSONObject(result);
-                    if (!jsonObject.getBoolean("success")) {
-                        toastText = "sorry, server error";
-                    } else {
-                        Log.d("tink", "make_room successful");
-                        toastText = "room is created!";
-                        //open socket
-                        //set textView "loading"
-                    }
-                } catch (JSONException e) {
-                    Log.d("tink-exception", "json object exception");
-                    e.printStackTrace();
-                }
-                Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-            }
-        }
-    } */
 }
