@@ -103,8 +103,8 @@ public class CreateJoinFragment extends Fragment {
                                             } else {
                                                 toastText = "play with " + targetName;
                                                 Intent intent = new Intent(getActivity(), GameActivity.class);
-                                                intent.putExtra("color", 1);
-                                                startActivity(intent);
+                                                intent.putExtra("color", 2);
+                                                startActivity(intent);  //game start with color data 2 (yellow)
                                             }
                                             Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
                                         }
