@@ -65,6 +65,28 @@ public class GalleryActivity extends AppCompatActivity{
                 }
             }
         });
+        Button button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //now gotta do something about json file.....shi...
+                File imgFile = new File(paths.get(p));
+                Bitmap bitmap;
+                if (imgFile.exists()) {
+                    bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                    byte[] b = baos.toByteArray();
+
+                    String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+                    String jsonString = JsonUtils.toJSon(MainActivity.userName, encodedImage);
+                    //do sharing
+                    String urlTail = "/upload_img";
+                    ImgUploadServerSS iuSS  = new ImgUploadServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST);
+                    iuSS.execute(getString(R.string.SERVER_URL) + urlTail);
+                }
+            }
+        });
 
     }
 
@@ -115,4 +137,6 @@ public class GalleryActivity extends AppCompatActivity{
     public void backto2(View view) {
         finish();
     }
+
+
 }

@@ -159,6 +159,8 @@ public class GalleryFragment extends Fragment{
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
+            MediaStore.Images.Media.insertImage(getContext().getContentResolver(),
+                    file.getAbsolutePath(), "tab3_sketches_title", "drawing");
         } catch (Exception e) {
             e.printStackTrace();
         }
