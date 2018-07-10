@@ -1,6 +1,7 @@
 package com.example.q.project2_master.Fragments;
 
 import android.app.AlertDialog;
+import android.content.ContentProviderOperation;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -16,18 +17,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.q.project2_master.Activities.MainActivity;
-import com.example.q.project2_master.Activities.Tab3Activity;
 import com.example.q.project2_master.Adapter.ContactsAdapter;
 import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.Models.ContactsModel;
@@ -197,18 +194,43 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
                             //contacts updated here
                             JSONArray jsonArray = jsonObject.getJSONArray("contacts");
                             int len = result.length();
-                            ContactsModel[] contactsModels = new ContactsModel[len];
                             for (int i=0; i<result.length(); i++) {
-                                String contactNumber = jsonArray.getJSONObject(i).getString("contact_number");
-                                ContactsModel contactsModel = new ContactsModel(MainActivity.userName, targetName, contactNumber);
-                                contactsModels[i] = contactsModel;
+                                final String contactNumber = jsonArray.getJSONObject(i).getString("contact_number");
                                 //getContacts().add(contactsModel);
                                 Log.d("contact_number", contactNumber);
+
+
+                                LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                                View promptView = layoutInflater.inflate(R.layout.output_dialog, null);
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                                alertDialogBuilder.setView(promptView);
+
+                                TextView textView = promptView.findViewById(R.id.textView);
+                                TextView textView2 = promptView.findViewById(R.id.textView2);
+                                textView.setText(targetName);
+                                textView2.setText(contactNumber);
+                                // setup a dialog window
+                                alertDialogBuilder.setCancelable(false)
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                //fill out if user did type out a name :D
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                // create an alert dialog
+                                AlertDialog alert = alertDialogBuilder.create();
+                                alert.show();
+
+
+
+
                             }
                             //TODO: contacts in device needs to be updated: by adding downloaded contacts from server.
                             // now contactsModels(Array) has all contacts from server.
                             // before adding it to the device contacts, check if there exists contact with duplicate contact_name && contact_number
                             // and if such contact already exist(satisfying both duplicate condition), don't add it to device.
+
+
                         }
                         catch (JSONException e) {
                             Log.d("tink-exception", "json array exception");
@@ -223,4 +245,5 @@ public class ContactsFragment extends Fragment implements SwipeRefreshLayout.OnR
             Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT);
         }
     }
+
 }
