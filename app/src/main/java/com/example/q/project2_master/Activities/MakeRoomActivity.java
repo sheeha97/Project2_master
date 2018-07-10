@@ -31,14 +31,16 @@ public class MakeRoomActivity extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String urlTail = "/make_room";
+                //String urlTail = "/make_room";
                 String jsonString = JsonUtils.toJSonRedName(MainActivity.userName);
-                MakeRoomServerSS mrSS= new MakeRoomServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST);
-                mrSS.execute(mContext.getString(R.string.SERVER_URL) + urlTail);
+
+                //MakeRoomServerSS mrSS= new MakeRoomServerSS(urlTail, jsonString, mContext, ServerSS.METHOD_POST);
+                //mrSS.execute(mContext.getString(R.string.SERVER_URL) + urlTail);
             }
         });
     }
 
+    /*
     class MakeRoomServerSS extends ServerSS {
         public MakeRoomServerSS(String urlTail, String stringData, Context context, int method) {
             super(urlTail, stringData, context, method);
@@ -69,5 +71,5 @@ public class MakeRoomActivity extends AppCompatActivity {
                 Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    } */
 }
