@@ -59,6 +59,7 @@ public class CreateJoinFragment extends Fragment { //TODO: disconnect socket
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                go.setUsercolor(2);
                 openDialog();
             }
         });
@@ -104,7 +105,6 @@ public class CreateJoinFragment extends Fragment { //TODO: disconnect socket
                                                 toastText = "play with " + targetName;
                                                 Log.d("tink", "connect success");
                                                 Intent intent = new Intent(getActivity(), GameActivity.class);
-                                                intent.putExtra("color", 2);
                                                 intent.putExtra("name", targetName);
                                                 startActivity(intent);  //game start with color data 2 (yellow) 
                                             }

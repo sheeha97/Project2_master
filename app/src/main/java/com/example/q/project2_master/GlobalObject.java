@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 
 public class GlobalObject extends Application {
 
+    private int usercolor;
+
     private Socket mSocket;
     String SERVER_URL = "http://52.231.65.108:8080";
 
@@ -23,5 +25,13 @@ public class GlobalObject extends Application {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setUsercolor(int color) {
+        usercolor = color;
+    }
+
+    public int getUsercolor() {
+        return usercolor;
     }
 }

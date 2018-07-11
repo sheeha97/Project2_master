@@ -43,8 +43,7 @@ public class GameActivity extends AppCompatActivity {
         mSocket = go.getSocket();
         createGrids();
 
-        Intent intent = getIntent();
-        final int color = (int)intent.getSerializableExtra("color");
+        final int color = go.getUsercolor();
         if (color == 2) {
             for (int i = 0; i < 6; i++) {
                 grids.get(36 + i).setClickable(false);
@@ -236,7 +235,7 @@ public class GameActivity extends AppCompatActivity {
     //makes move
     private void makeMove(int index) {
         Intent intent = getIntent();
-        final int color = (int)intent.getSerializableExtra("color");
+        final int color = go.getUsercolor();
         final String targetName = (String)intent.getSerializableExtra("name");
         String jSonmove;
 

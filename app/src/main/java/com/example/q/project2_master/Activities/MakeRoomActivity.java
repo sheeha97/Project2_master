@@ -42,6 +42,7 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
             @Override
             public void onClick(View view) { //'create_response', 'create_request'
                 go = ((GlobalObject) getApplicationContext());
+                go.setUsercolor(1);
                 go.connectSocket();
                 mSocket = go.getSocket();
                 String userName = MainActivity.userName;
