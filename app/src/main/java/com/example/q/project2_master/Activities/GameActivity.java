@@ -252,9 +252,9 @@ public class GameActivity extends AppCompatActivity {
     private void move(int color, int done, boolean valid, int position) {
         if (done == 0 && valid) {
             if (color == 1) {
-                grids.get(position).setImageResource(R.drawable.red);
+                grids.get(position - 1).setImageResource(R.drawable.red);
             } else {
-                grids.get(position).setImageResource(R.drawable.yellow);
+                grids.get(position - 1).setImageResource(R.drawable.yellow);
             }
             //set text not clickable
             for (int i=0; i< 6; i++) {
@@ -271,9 +271,9 @@ public class GameActivity extends AppCompatActivity {
     private void colorOther(int color, int done, boolean valid, int position) {
         if (done == 0 && valid) {
             if (color == 1) {
-                grids.get(position).setImageResource(R.drawable.red);
+                grids.get(position - 1).setImageResource(R.drawable.red);
             } else {
-                grids.get(position).setImageResource(R.drawable.yellow);
+                grids.get(position - 1).setImageResource(R.drawable.yellow);
             }
         } else if (done == 0 && !valid) {
             Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
