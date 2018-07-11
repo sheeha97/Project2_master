@@ -292,11 +292,7 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
 
         } else if (done == 1 || done == 2) {
-            if (done == 1) {
-                win(2);
-            } else {
-                win(1);
-            }
+            win(done);
         }
     }
 
