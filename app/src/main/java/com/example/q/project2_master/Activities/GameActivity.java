@@ -45,7 +45,11 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final int color = (int)intent.getSerializableExtra("color");
-
+        if (color == 2) {
+            for (int i = 0; i < 6; i++) {
+                grids.get(36 + i).setClickable(false);
+            }
+        }
 
         Emitter.Listener listener = new Emitter.Listener() {
 
