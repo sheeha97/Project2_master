@@ -39,9 +39,34 @@ public class GameActivity extends AppCompatActivity {
         mSocket = go.getSocket();
         createGrids();
 
+        Intent intent = getIntent();
+        final int color = (int)intent.getSerializableExtra("color");
 
+        if (color == 2) {
+            Emitter.Listener listener = new Emitter.Listener() {
 
+                public void call(Object... args) {
+                    Log.d("tink", "responded");
+                    final JSONObject obj = (JSONObject)args[0];
+                    try {
+                        final int done = obj.getInt("done");
+                        final boolean valid = obj.getBoolean("valid");
+                        final int position = obj.getInt("position");
 
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                move(color, done, valid, position);
+                            }
+                        });
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            mSocket.on("red_toyellow", listener);
+        }
 
         //index0
         grids.get(36).setOnClickListener(new View.OnClickListener() {
