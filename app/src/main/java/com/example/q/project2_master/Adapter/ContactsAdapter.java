@@ -140,7 +140,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         // Set Custom Title
         TextView title = new TextView(mContext);
         // Title Properties
-        title.setText("Custom Dialog Box");
+        title.setText("Store Contact");
         title.setPadding(10, 10, 10, 10);   // Set Position
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.BLACK);
@@ -150,7 +150,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         // Set Message
         TextView msg = new TextView(mContext);
         // Message Properties
-        msg.setText("I am a Custom Dialog Box. \n Please Customize me.");
+        msg.setText("Would you like to store this contact?");
         msg.setGravity(Gravity.CENTER_HORIZONTAL);
         msg.setTextColor(Color.BLACK);
         alertDialog.setView(msg);

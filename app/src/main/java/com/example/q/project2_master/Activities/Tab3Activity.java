@@ -30,7 +30,7 @@ public class Tab3Activity extends AppCompatActivity{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private final int[] ICONS = {R.drawable.human, R.drawable.ic_backarrow, R.drawable.ic_game};
+    private final int[] ICONS = {R.drawable.human, R.drawable.ic_gallery, R.drawable.ic_game};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
