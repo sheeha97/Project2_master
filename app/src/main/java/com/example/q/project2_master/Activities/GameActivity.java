@@ -42,31 +42,53 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final int color = (int)intent.getSerializableExtra("color");
 
-        if (color == 2) {
-            Emitter.Listener listener = new Emitter.Listener() {
 
-                public void call(Object... args) {
-                    Log.d("tink", "responded");
-                    final JSONObject obj = (JSONObject)args[0];
-                    try {
-                        final int done = obj.getInt("done");
-                        final boolean valid = obj.getBoolean("valid");
-                        final int position = obj.getInt("position");
+        Emitter.Listener listener = new Emitter.Listener() {
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+            public void call(Object... args) {
+                Log.d("tink", "responded");
+                final JSONObject obj = (JSONObject)args[0];
+                try {
+                    final int done = obj.getInt("done");
+                    final boolean valid = obj.getBoolean("valid");
+                    final int position = obj.getInt("position");
+
+                    runOnUiThread(new Runnable() {
+                        private int doColor;
+                        @Override
+                        public void run() {
+                            if (color == 1 && !grids.get(36).isClickable()) {
+                                doColor = 2;
+                                colorOther(doColor, done, valid, position);
+                                for (int i = 0; i < 7; i++) {
+                                    grids.get(36 + i).setClickable(true);
+                                }
+
+                            } else if (color == 2 && !grids.get(36).isClickable()){
+                                doColor = 1;
+                                colorOther(doColor, done, valid, position);
+                                for (int i = 0; i < 7; i++) {
+                                    grids.get(36 + i).setClickable(true);
+                                }
+                            } else if(color == 1 && grids.get(36).isClickable()) {
+                                move(color, done, valid, position);
+                            } else {
                                 move(color, done, valid, position);
                             }
-                        });
 
-                    } catch (JSONException e) {
+                        }
+                    });
+                } catch (JSONException e) {
                         e.printStackTrace();
-                    }
                 }
-            };
+            }
+        };
+        if (color == 1) {
+            mSocket.on("yellow_tored", listener);
+        } else {
             mSocket.on("red_toyellow", listener);
         }
+
 
         //index0
         grids.get(36).setOnClickListener(new View.OnClickListener() {
@@ -216,58 +238,21 @@ public class GameActivity extends AppCompatActivity {
     private void makeMove(int index) {
         Intent intent = getIntent();
         final int color = (int)intent.getSerializableExtra("color");
-
-
         String jSonmove = JsonUtils.toJsonMove(color, index);
 
-
-
-        Emitter.Listener listener = new Emitter.Listener() {
-
-            public void call(Object... args) {
-                Log.d("tink", "responded");
-                final JSONObject obj = (JSONObject)args[0];
-                try {
-                    final int done = obj.getInt("done");
-                    final boolean valid = obj.getBoolean("valid");
-                    final int position = obj.getInt("position");
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            move(color, done, valid, position);
-                        }
-                    });
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-
-        if (color == 1) {
-            mSocket.on("yellow_tored", listener);
-        } else {
-            mSocket.on("red_toyellow", listener);
-        }
         if (color == 1) {
             mSocket.emit("red_play_request", jSonmove);
-        } else if (color == 2) {
+        } else {
             mSocket.emit("yellow_play_request", jSonmove);
         }
-
     }
 
     private void move(int color, int done, boolean valid, int position) {
         if (done == 0 && valid) {
             if (color == 1) {
-                CircleImageView circleImageView = grids.get(position);
-                circleImageView.setImageResource(R.drawable.red);
-
-            } else if (color == 2) {
-                CircleImageView circleImageView = grids.get(position);
-                circleImageView.setImageResource(R.drawable.yellow);
+                grids.get(position).setImageResource(R.drawable.red);
+            } else {
+                grids.get(position).setImageResource(R.drawable.yellow);
             }
         } else if (done == 0 && !valid) {
             Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
@@ -276,6 +261,23 @@ public class GameActivity extends AppCompatActivity {
             win(done);
         }
     }
+
+    private void colorOther(int color, int done, boolean valid, int position) {
+        if (done == 0 && valid) {
+            if (color == 1) {
+                grids.get(position).setImageResource(R.drawable.red);
+            } else {
+                grids.get(position).setImageResource(R.drawable.yellow);
+            }
+        } else if (done == 0 && !valid) {
+            Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
+
+        } else if (done == 1 || done == 2) {
+            win(done);
+        }
+    }
+
+
 
     private void win(int winner) {
         //ok
