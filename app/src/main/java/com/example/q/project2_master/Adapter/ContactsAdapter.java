@@ -94,7 +94,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             super(itemView);
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
-            contact_number2 = itemView.findViewById(R.id.contact_number2);
         }
 
     }

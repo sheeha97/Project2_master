@@ -87,11 +87,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         };
-        if (color == 1) {
-            mSocket.on("yellow_tored", listener);
-        } else {
-            mSocket.on("red_toyellow", listener);
-        }
+        mSocket.on("show_result", listener);
 
 
         //index0
