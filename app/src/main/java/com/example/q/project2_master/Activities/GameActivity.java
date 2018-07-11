@@ -299,6 +299,12 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
         alertDialog.setTitle("Winner!");
         alertDialog.setMessage("Player " + winnerName+" is the Winner!");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
         alertDialog.show();
     }
 
