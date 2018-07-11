@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.q.project2_master.Activities.AppStartActivity;
+
 import com.example.q.project2_master.Activities.MainActivity;
 import com.example.q.project2_master.Activities.PersonsInfoActivity;
 import com.example.q.project2_master.AsyncTasks.ServerSS;

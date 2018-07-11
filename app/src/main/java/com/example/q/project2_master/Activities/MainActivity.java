@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.example.q.project2_master.Activities.Tab3Activity;
 import com.example.q.project2_master.AsyncTasks.ServerSS;
 import com.example.q.project2_master.R;
-import com.example.q.project2_master.AsyncTasks.SendPost;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
