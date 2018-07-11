@@ -81,9 +81,9 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
                         public void run() {
                             if (room_exist && room_available) {
                                 Toast.makeText(mContext, "start play!", Toast.LENGTH_SHORT).show();
-                                /*Intent intent = new Intent(mContext, GameActivity.class);
+                                Intent intent = new Intent(mContext, GameActivity.class);
                                 intent.putExtra("color", 1);
-                                startActivity(intent); */ //TODO: 주석처리 다시 해제!
+                                startActivity(intent);
                             }
                         }
                     });
