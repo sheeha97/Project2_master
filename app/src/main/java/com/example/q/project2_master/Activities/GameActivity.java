@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.q.project2_master.GlobalObject;
 import com.example.q.project2_master.R;
@@ -23,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GameActivity extends AppCompatActivity {
     private View view;
-    private ArrayList<CircleImageView> grids;
+    private ArrayList<CircleImageView> grids = new ArrayList<CircleImageView>();
     Socket mSocket;
     GlobalObject go;
     TextView textView;
@@ -33,26 +34,29 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_board);
 
-        createGrids();
-
-
         go = ((GlobalObject) getApplicationContext());
         go.connectSocket();
         mSocket = go.getSocket();
+        createGrids();
+
+
+
 
 
         //index0
         grids.get(36).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                grids.get(36).setClickable(false);
                 makeMove(0);
             }
         });
 
         //index1
-        grids.get(38).setOnClickListener(new View.OnClickListener() {
+        grids.get(37).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                grids.get(37).setClickable(false);
                 makeMove(1);
 
             }
@@ -61,6 +65,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(38).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                grids.get(38).setClickable(false);
                 makeMove(2);
 
             }
@@ -69,6 +74,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(39).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                grids.get(39).setClickable(false);
                 makeMove(3);
 
             }
@@ -77,6 +83,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(40).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                grids.get(40).setClickable(false);
                 makeMove(4);
 
             }
@@ -85,6 +92,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(41).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                grids.get(41).setClickable(false);
                 makeMove(5);
             }
         });
@@ -197,25 +205,6 @@ public class GameActivity extends AppCompatActivity {
 
             public void call(Object... args) {
                 Log.d("tink", "responded");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (color == 1) {
-                            listenRed();
-                        } else if (color == 2){
-                            listenYellow();
-                        }
-                    }
-                });
-            }
-        };
-    }
-
-    private void listenRed() {
-        Emitter.Listener listener = new Emitter.Listener() {
-
-            public void call(Object... args) {
-                Log.d("tink", "responded");
                 final JSONObject obj = (JSONObject)args[0];
                 try {
                     final int done = obj.getInt("done");
@@ -225,22 +214,37 @@ public class GameActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (done == 0 && valid) {
-
-                            }
+                            move(color, done, valid, position);
                         }
                     });
-                }
-                catch (JSONException e) {
+
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
     }
 
+    private void move(int color, int done, boolean valid, int position) {
+        if (done == 0 && valid) {
+            if (color == 1) {
+                CircleImageView circleImageView = grids.get(position);
+                circleImageView.setImageResource(R.drawable.red);
 
-    private void listenYellow() {
+            } else if (color == 2) {
+                CircleImageView circleImageView = grids.get(position);
+                circleImageView.setImageResource(R.drawable.yellow);
+            }
+        } else if (done == 0 && !valid) {
+            Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
 
+        } else if (done == 1 || done == 2) {
+            win(done);
+        }
+    }
+
+    private void win(int winner) {
+        //ok
     }
 
 }
