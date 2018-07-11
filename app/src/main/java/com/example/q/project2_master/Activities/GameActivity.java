@@ -237,11 +237,14 @@ public class GameActivity extends AppCompatActivity {
     private void makeMove(int index) {
         Intent intent = getIntent();
         final int color = (int)intent.getSerializableExtra("color");
-        String jSonmove = JsonUtils.toJsonMove(color, index);
+        final String targetName = (String)intent.getSerializableExtra("name");
+        String jSonmove;
 
         if (color == 1) {
+            jSonmove = JsonUtils.toJsonMove(MainActivity.userName, index);
             mSocket.emit("red_play_request", jSonmove);
         } else {
+            jSonmove = JsonUtils.toJsonMove(targetName, index);
             mSocket.emit("yellow_play_request", jSonmove);
         }
     }

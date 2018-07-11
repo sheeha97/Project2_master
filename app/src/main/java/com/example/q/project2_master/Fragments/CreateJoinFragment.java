@@ -105,6 +105,7 @@ public class CreateJoinFragment extends Fragment { //TODO: disconnect socket
                                                 Log.d("tink", "connect success");
                                                 Intent intent = new Intent(getActivity(), GameActivity.class);
                                                 intent.putExtra("color", 2);
+                                                intent.putExtra("name", targetName);
                                                 startActivity(intent);  //game start with color data 2 (yellow) 
                                             }
                                             Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();

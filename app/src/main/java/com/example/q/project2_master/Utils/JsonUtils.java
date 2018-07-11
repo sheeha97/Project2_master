@@ -88,12 +88,12 @@ public class JsonUtils {
         return null;
     }
 
-    public static String toJsonMove(int color, int index) {
+    public static String toJsonMove(String name, int index) {
         try {
             // Here we convert Java Object to JSON
             JSONObject jsonObj = new JSONObject();
 
-            jsonObj.put("red_name", color);
+            jsonObj.put("red_name", name);
             jsonObj.put("index", index);
 
 
