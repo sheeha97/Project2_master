@@ -23,13 +23,14 @@ import android.view.View;
 import com.example.q.project2_master.Adapter.ViewPagerAdapter;
 import com.example.q.project2_master.Fragments.ContactsFragment;
 import com.example.q.project2_master.Fragments.GalleryFragment;
+import com.example.q.project2_master.Fragments.PregameFragment;
 import com.example.q.project2_master.R;
 
 public class Tab3Activity extends AppCompatActivity{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private final int[] ICONS = {R.drawable.human, R.drawable.ic_backarrow, R.drawable.ic_phone};
+    private final int[] ICONS = {R.drawable.human, R.drawable.ic_backarrow, R.drawable.ic_game};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class Tab3Activity extends AppCompatActivity{
 
         adapter.addFragment(new ContactsFragment(), "Contacts");
         adapter.addFragment(new GalleryFragment(), "Gallery");
-        //adapter.addFragment(new FragmentLoadInsta(), "Filter");
+        adapter.addFragment(new PregameFragment(), "Connect4");
 
         viewPager.setAdapter(adapter);
 
