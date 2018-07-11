@@ -64,7 +64,6 @@ public class GameActivity extends AppCompatActivity {
             final String targetName = (String)intent.getSerializableExtra("name");
             mSocket.emit("yellow_start", targetName);
         }
-
         Emitter.Listener listener = new Emitter.Listener() {
 
             public void call(Object... args) {
