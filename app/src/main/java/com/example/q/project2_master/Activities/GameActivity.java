@@ -296,16 +296,10 @@ public class GameActivity extends AppCompatActivity {
         } else {
             winnerName = "Yellow";
         }
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View promptView = layoutInflater.inflate(R.layout.win_dialog, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setView(promptView);
-        TextView textView = findViewById(R.id.textView);
-        textView.setText((winnerName + " wins!"));
-
-        // create an alert dialog
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
+        AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
+        alertDialog.setTitle("Winner!");
+        alertDialog.setMessage("Player " + winnerName+" is the Winner!");
+        alertDialog.show();
     }
 
 }

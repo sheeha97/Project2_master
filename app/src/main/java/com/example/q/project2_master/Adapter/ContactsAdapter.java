@@ -73,28 +73,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(view.getContext(), PersonsInfoActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", contact_name.getText().toString());
-                bundle.putString("number", contact_number.getText().toString());
-                bundle.putString("number2", contact_number2.getText().toString());
-                intent.putExtras(bundle);
-                view.getContext().startActivity(intent);*/
 
-
-                /*SharedPreferences sf = mContext.getSharedPreferences("user_name_saver", 0);
-                userName = sf.getString("user_name_preference", "");*/  //TODO: maybe MainActivity.userName can be replaced by this??
-
-
-
-                //Create jsonString
                 ContactsModel person = new ContactsModel(MainActivity.userName, contact_name.getText().toString(), contact_number.getText().toString());
                 String jsonString = JsonUtils.toJSon(person);
 
-                //Open dialog
                 openDialog(jsonString);
-
-
 
             }
         });
