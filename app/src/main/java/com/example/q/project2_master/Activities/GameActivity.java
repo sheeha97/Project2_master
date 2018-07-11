@@ -1,11 +1,15 @@
 package com.example.q.project2_master.Activities;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,14 +64,14 @@ public class GameActivity extends AppCompatActivity {
                             if (color == 1 && !grids.get(36).isClickable()) {
                                 doColor = 2;
                                 colorOther(doColor, done, valid, position);
-                                for (int i = 0; i < 7; i++) {
+                                for (int i = 0; i < 6; i++) {
                                     grids.get(36 + i).setClickable(true);
                                 }
 
                             } else if (color == 2 && !grids.get(36).isClickable()){
                                 doColor = 1;
                                 colorOther(doColor, done, valid, position);
-                                for (int i = 0; i < 7; i++) {
+                                for (int i = 0; i < 6; i++) {
                                     grids.get(36 + i).setClickable(true);
                                 }
                             } else if(color == 1 && grids.get(36).isClickable()) {
@@ -94,7 +98,6 @@ public class GameActivity extends AppCompatActivity {
         grids.get(36).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                grids.get(36).setClickable(false);
                 makeMove(0);
             }
         });
@@ -103,7 +106,6 @@ public class GameActivity extends AppCompatActivity {
         grids.get(37).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                grids.get(37).setClickable(false);
                 makeMove(1);
 
             }
@@ -112,7 +114,6 @@ public class GameActivity extends AppCompatActivity {
         grids.get(38).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                grids.get(38).setClickable(false);
                 makeMove(2);
 
             }
@@ -121,7 +122,6 @@ public class GameActivity extends AppCompatActivity {
         grids.get(39).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                grids.get(39).setClickable(false);
                 makeMove(3);
 
             }
@@ -130,7 +130,6 @@ public class GameActivity extends AppCompatActivity {
         grids.get(40).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                grids.get(40).setClickable(false);
                 makeMove(4);
 
             }
@@ -139,7 +138,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(41).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                grids.get(41).setClickable(false);
+
                 makeMove(5);
             }
         });
@@ -254,6 +253,10 @@ public class GameActivity extends AppCompatActivity {
             } else {
                 grids.get(position).setImageResource(R.drawable.yellow);
             }
+            //set text not clickable
+            for (int i=0; i< 6; i++) {
+                grids.get(36 +i ).setClickable(false);
+            }
         } else if (done == 0 && !valid) {
             Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
 
@@ -273,14 +276,33 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
 
         } else if (done == 1 || done == 2) {
-            win(done);
+            if (done == 1) {
+                win(2);
+            } else {
+                win(1);
+            }
         }
     }
 
 
 
     private void win(int winner) {
-        //ok
+        String winnerName;
+        if (winner == 1) {
+            winnerName = "Red";
+        } else {
+            winnerName = "Yellow";
+        }
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View promptView = layoutInflater.inflate(R.layout.win_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(promptView);
+        TextView textView = findViewById(R.id.textView);
+        textView.setText((winnerName + " wins!"));
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
 }
