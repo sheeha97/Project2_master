@@ -1,30 +1,59 @@
 package com.example.q.project2_master.Activities;
 import android.app.Activity;
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.q.project2_master.GlobalObject;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class GameActivity extends AppCompatActivity {
     private View view;
-    private ArrayList<ImageView> grids;
+    private ArrayList<CircleImageView> grids;
+    Socket mSocket;
+    GlobalObject go;
+    TextView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_board);
+
         createGrids();
-        grids.get(37).setOnClickListener(new View.OnClickListener() {
+
+
+        go = ((GlobalObject) getApplicationContext());
+        go.connectSocket();
+        mSocket = go.getSocket();
+
+
+        //index0
+        grids.get(36).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(0);
+            }
+        });
+
+        //index1
+        grids.get(38).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeMove(1);
 
             }
         });
@@ -32,6 +61,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(38).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(2);
 
             }
         });
@@ -39,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(39).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(3);
 
             }
         });
@@ -46,6 +77,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(40).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(4);
 
             }
         });
@@ -53,14 +85,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(41).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-            }
-        });
-
-        grids.get(42).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+                makeMove(5);
             }
         });
 
@@ -68,48 +93,48 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void createGrids() {
-        ImageView imageView1 = findViewById(R.id.grid1);
-        ImageView imageView2 = findViewById(R.id.grid2);
-        ImageView imageView3 = findViewById(R.id.grid3);
-        ImageView imageView4 = findViewById(R.id.grid4);
-        ImageView imageView5 = findViewById(R.id.grid5);
-        ImageView imageView6 = findViewById(R.id.grid6);
-        ImageView imageView7 = findViewById(R.id.grid7);
-        ImageView imageView8 = findViewById(R.id.grid8);
-        ImageView imageView9 = findViewById(R.id.grid9);
-        ImageView imageView10 = findViewById(R.id.grid10);
-        ImageView imageView11 = findViewById(R.id.grid11);
-        ImageView imageView12 = findViewById(R.id.grid12);
-        ImageView imageView13 = findViewById(R.id.grid13);
-        ImageView imageView14 = findViewById(R.id.grid14);
-        ImageView imageView15 = findViewById(R.id.grid15);
-        ImageView imageView16 = findViewById(R.id.grid16);
-        ImageView imageView17 = findViewById(R.id.grid17);
-        ImageView imageView18 = findViewById(R.id.grid18);
-        ImageView imageView19 = findViewById(R.id.grid19);
-        ImageView imageView20 = findViewById(R.id.grid20);
-        ImageView imageView21 = findViewById(R.id.grid21);
-        ImageView imageView22 = findViewById(R.id.grid22);
-        ImageView imageView23 = findViewById(R.id.grid23);
-        ImageView imageView24 = findViewById(R.id.grid24);
-        ImageView imageView25 = findViewById(R.id.grid25);
-        ImageView imageView26 = findViewById(R.id.grid26);
-        ImageView imageView27 = findViewById(R.id.grid27);
-        ImageView imageView28 = findViewById(R.id.grid28);
-        ImageView imageView29 = findViewById(R.id.grid29);
-        ImageView imageView30 = findViewById(R.id.grid30);
-        ImageView imageView31 = findViewById(R.id.grid31);
-        ImageView imageView32 = findViewById(R.id.grid32);
-        ImageView imageView33 = findViewById(R.id.grid33);
-        ImageView imageView34 = findViewById(R.id.grid34);
-        ImageView imageView35 = findViewById(R.id.grid35);
-        ImageView imageView36 = findViewById(R.id.grid36);
-        ImageView imageView37 = findViewById(R.id.grid37);
-        ImageView imageView38 = findViewById(R.id.grid38);
-        ImageView imageView39 = findViewById(R.id.grid39);
-        ImageView imageView40 = findViewById(R.id.grid40);
-        ImageView imageView41 = findViewById(R.id.grid41);
-        ImageView imageView42 = findViewById(R.id.grid42);
+        CircleImageView imageView1 = findViewById(R.id.grid1);
+        CircleImageView imageView2 = findViewById(R.id.grid2);
+        CircleImageView imageView3 = findViewById(R.id.grid3);
+        CircleImageView imageView4 = findViewById(R.id.grid4);
+        CircleImageView imageView5 = findViewById(R.id.grid5);
+        CircleImageView imageView6 = findViewById(R.id.grid6);
+        CircleImageView imageView7 = findViewById(R.id.grid7);
+        CircleImageView imageView8 = findViewById(R.id.grid8);
+        CircleImageView imageView9 = findViewById(R.id.grid9);
+        CircleImageView imageView10 = findViewById(R.id.grid10);
+        CircleImageView imageView11 = findViewById(R.id.grid11);
+        CircleImageView imageView12 = findViewById(R.id.grid12);
+        CircleImageView imageView13 = findViewById(R.id.grid13);
+        CircleImageView imageView14 = findViewById(R.id.grid14);
+        CircleImageView imageView15 = findViewById(R.id.grid15);
+        CircleImageView imageView16 = findViewById(R.id.grid16);
+        CircleImageView imageView17 = findViewById(R.id.grid17);
+        CircleImageView imageView18 = findViewById(R.id.grid18);
+        CircleImageView imageView19 = findViewById(R.id.grid19);
+        CircleImageView imageView20 = findViewById(R.id.grid20);
+        CircleImageView imageView21 = findViewById(R.id.grid21);
+        CircleImageView imageView22 = findViewById(R.id.grid22);
+        CircleImageView imageView23 = findViewById(R.id.grid23);
+        CircleImageView imageView24 = findViewById(R.id.grid24);
+        CircleImageView imageView25 = findViewById(R.id.grid25);
+        CircleImageView imageView26 = findViewById(R.id.grid26);
+        CircleImageView imageView27 = findViewById(R.id.grid27);
+        CircleImageView imageView28 = findViewById(R.id.grid28);
+        CircleImageView imageView29 = findViewById(R.id.grid29);
+        CircleImageView imageView30 = findViewById(R.id.grid30);
+        CircleImageView imageView31 = findViewById(R.id.grid31);
+        CircleImageView imageView32 = findViewById(R.id.grid32);
+        CircleImageView imageView33 = findViewById(R.id.grid33);
+        CircleImageView imageView34 = findViewById(R.id.grid34);
+        CircleImageView imageView35 = findViewById(R.id.grid35);
+        CircleImageView imageView36 = findViewById(R.id.grid36);
+        CircleImageView imageView37 = findViewById(R.id.grid37);
+        CircleImageView imageView38 = findViewById(R.id.grid38);
+        CircleImageView imageView39 = findViewById(R.id.grid39);
+        CircleImageView imageView40 = findViewById(R.id.grid40);
+        CircleImageView imageView41 = findViewById(R.id.grid41);
+        CircleImageView imageView42 = findViewById(R.id.grid42);
         grids.add(imageView1);
         grids.add(imageView2);
         grids.add(imageView3);
@@ -153,4 +178,69 @@ public class GameActivity extends AppCompatActivity {
         grids.add(imageView41);
         grids.add(imageView42);
     }
+
+    //makes move
+    private void makeMove(int index) {
+        Intent intent = getIntent();
+        final int color = (int)intent.getSerializableExtra("color");
+
+
+        String jSonmove = JsonUtils.toJsonMove(color, index);
+        if (color == 1) {
+            mSocket.emit("red_play_request", jSonmove);
+        } else if (color == 2) {
+            mSocket.emit("yellow_play_request", jSonmove);
+        }
+
+
+        Emitter.Listener listener = new Emitter.Listener() {
+
+            public void call(Object... args) {
+                Log.d("tink", "responded");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (color == 1) {
+                            listenRed();
+                        } else if (color == 2){
+                            listenYellow();
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    private void listenRed() {
+        Emitter.Listener listener = new Emitter.Listener() {
+
+            public void call(Object... args) {
+                Log.d("tink", "responded");
+                final JSONObject obj = (JSONObject)args[0];
+                try {
+                    final int done = obj.getInt("done");
+                    final boolean valid = obj.getBoolean("valid");
+                    final int position = obj.getInt("position");
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (done == 0 && valid) {
+
+                            }
+                        }
+                    });
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
+
+    private void listenYellow() {
+
+    }
+
 }
