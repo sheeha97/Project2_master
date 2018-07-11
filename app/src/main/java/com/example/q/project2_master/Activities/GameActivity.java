@@ -219,11 +219,7 @@ public class GameActivity extends AppCompatActivity {
 
 
         String jSonmove = JsonUtils.toJsonMove(color, index);
-        if (color == 1) {
-            mSocket.emit("red_play_request", jSonmove);
-        } else if (color == 2) {
-            mSocket.emit("yellow_play_request", jSonmove);
-        }
+
 
 
         Emitter.Listener listener = new Emitter.Listener() {
@@ -248,6 +244,19 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         };
+
+
+        if (color == 1) {
+            mSocket.on("yellow_tored", listener);
+        } else {
+            mSocket.on("red_toyellow", listener);
+        }
+        if (color == 1) {
+            mSocket.emit("red_play_request", jSonmove);
+        } else if (color == 2) {
+            mSocket.emit("yellow_play_request", jSonmove);
+        }
+
     }
 
     private void move(int color, int done, boolean valid, int position) {
