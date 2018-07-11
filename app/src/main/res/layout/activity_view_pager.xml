@@ -41,26 +41,19 @@
         android:background="@android:color/white">
 
     </com.example.q.project2_master.Utils.HackyViewPager>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <Button
             android:id="@+id/button"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="427dp"
+            android:layout_height="113dp"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:text="Share"
-            />
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:text="Share2"
-            />
+            android:text="Share" />
     </LinearLayout>
 
 
