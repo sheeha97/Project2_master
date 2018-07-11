@@ -25,10 +25,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import static com.example.q.project2_master.Utils.JsonUtils.toJSonRedName;
 
-public class MakeRoomActivity extends AppCompatActivity {
+public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect socket
     private Button startBtn;
     private Context mContext = this;
-    String SERVER_URL = getString(R.string.SERVER_URL);
     Socket mSocket;
     GlobalObject go;
     TextView textView;
@@ -38,9 +37,11 @@ public class MakeRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makeroom);
         startBtn = findViewById(R.id.start_button);
+        textView = findViewById(R.id.loading_textview);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { //'create_response', 'create_request'
+                go = ((GlobalObject) getApplicationContext());
                 go.connectSocket();
                 mSocket = go.getSocket();
                 String userName = MainActivity.userName;

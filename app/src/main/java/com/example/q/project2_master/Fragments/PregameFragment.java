@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.q.project2_master.R;
 
@@ -23,7 +24,7 @@ public class PregameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_pre_game, container, false);
-        Button pregameButton = v.findViewById(R.id.pregame_button);
+        ImageButton pregameButton = v.findViewById(R.id.pregame_button);
         pregameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

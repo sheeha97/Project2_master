@@ -40,11 +40,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URISyntaxException;
 
-public class CreateJoinFragment extends Fragment {
+public class CreateJoinFragment extends Fragment { //TODO: disconnect socket
 
 
     private View v;
-    String SERVER_URL = getString(R.string.SERVER_URL);
     Socket mSocket;
     GlobalObject go;
 
@@ -79,6 +78,7 @@ public class CreateJoinFragment extends Fragment {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         final String targetName = editText.getText().toString();
+                        go = ((GlobalObject) getActivity().getApplicationContext());
                         go.connectSocket();
                         mSocket = go.getSocket();
                         Emitter.Listener listener = new Emitter.Listener() {
