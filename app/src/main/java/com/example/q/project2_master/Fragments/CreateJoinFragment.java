@@ -102,9 +102,10 @@ public class CreateJoinFragment extends Fragment { //TODO: disconnect socket
                                                 toastText = "player is already on play!";
                                             } else {
                                                 toastText = "play with " + targetName;
-                                                Intent intent = new Intent(getActivity(), GameActivity.class);
+                                                Log.d("tink", "connect success");
+                                                /*Intent intent = new Intent(getActivity(), GameActivity.class);
                                                 intent.putExtra("color", 2);
-                                                startActivity(intent);  //game start with color data 2 (yellow)
+                                                startActivity(intent);  //game start with color data 2 (yellow) */ // TODO: 주석처리 다시 해제!
                                             }
                                             Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
                                         }

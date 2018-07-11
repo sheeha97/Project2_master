@@ -65,6 +65,7 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
     }
 
     public void listenYellow(Socket mSocket) {
+        mSocket = go.getSocket();
         Emitter.Listener listener = new Emitter.Listener() {
 
             public void call(Object... args) {
@@ -80,9 +81,9 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
                         public void run() {
                             if (room_exist && room_available) {
                                 Toast.makeText(mContext, "start play!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(mContext, GameActivity.class);
+                                /*Intent intent = new Intent(mContext, GameActivity.class);
                                 intent.putExtra("color", 1);
-                                startActivity(intent);
+                                startActivity(intent); */ //TODO: 주석처리 다시 해제!
                             }
                         }
                     });
@@ -92,6 +93,7 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
                 }
             }
         };
+        mSocket.on("red_join_response", listener);
     }
 
 }
