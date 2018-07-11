@@ -44,10 +44,25 @@ public class GameActivity extends AppCompatActivity {
         createGrids();
 
         final int color = go.getUsercolor();
+
         if (color == 2) {
-            for (int i = 0; i < 6; i++) {
-                grids.get(36 + i).setClickable(false);
-            }
+            Emitter.Listener listener2 = new Emitter.Listener() {
+
+                public void call(Object... args) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i < 6; i++) {
+                                grids.get(36 + i).setClickable(false);
+                            }
+                        }
+                    });
+                }
+            };
+            mSocket.on("unable_buttons", listener2);
+            Intent intent = getIntent();
+            final String targetName = (String)intent.getSerializableExtra("name");
+            mSocket.emit("yellow_start", targetName);
         }
 
         Emitter.Listener listener = new Emitter.Listener() {
@@ -61,6 +76,7 @@ public class GameActivity extends AppCompatActivity {
                     final int position = obj.getInt("position");
 
                     runOnUiThread(new Runnable() {
+
                         private int doColor;
                         @Override
                         public void run() {
@@ -70,8 +86,7 @@ public class GameActivity extends AppCompatActivity {
                                 for (int i = 0; i < 6; i++) {
                                     grids.get(36 + i).setClickable(true);
                                 }
-
-                            } else if (color == 2 && !grids.get(36).isClickable()){
+                            } else if (color == 2 && !grids.get(36).isClickable()) {
                                 doColor = 1;
                                 colorOther(doColor, done, valid, position);
                                 for (int i = 0; i < 6; i++) {
@@ -79,10 +94,9 @@ public class GameActivity extends AppCompatActivity {
                                 }
                             } else if(color == 1 && grids.get(36).isClickable()) {
                                 move(color, done, valid, position);
-                            } else {
+                            } else if (color == 2 && grids.get(36).isClickable()){
                                 move(color, done, valid, position);
                             }
-
                         }
                     });
                 } catch (JSONException e) {
@@ -91,6 +105,7 @@ public class GameActivity extends AppCompatActivity {
             }
         };
         mSocket.on("show_result", listener);
+
 
 
         //index0
@@ -238,7 +253,6 @@ public class GameActivity extends AppCompatActivity {
         final int color = go.getUsercolor();
         final String targetName = (String)intent.getSerializableExtra("name");
         String jSonmove;
-
         if (color == 1) {
             jSonmove = JsonUtils.toJsonMove(MainActivity.userName, index);
             mSocket.emit("red_play_request", jSonmove);
