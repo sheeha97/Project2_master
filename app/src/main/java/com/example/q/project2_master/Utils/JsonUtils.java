@@ -87,4 +87,22 @@ public class JsonUtils {
 
         return null;
     }
+
+    public static String toJsonMove(int color, int index) {
+        try {
+            // Here we convert Java Object to JSON
+            JSONObject jsonObj = new JSONObject();
+
+            jsonObj.put("red_name", color);
+            jsonObj.put("index", index);
+
+
+            return jsonObj.toString();
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 }

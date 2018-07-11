@@ -1,15 +1,21 @@
 package com.example.q.project2_master.Activities;
 import android.app.Activity;
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-
+import com.example.q.project2_master.GlobalObject;
 import com.example.q.project2_master.R;
+import com.example.q.project2_master.Utils.JsonUtils;
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -18,15 +24,36 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class GameActivity extends AppCompatActivity {
     private View view;
     private ArrayList<CircleImageView> grids;
+    Socket mSocket;
+    GlobalObject go;
+    TextView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_board);
+
         createGrids();
-        grids.get(37).setOnClickListener(new View.OnClickListener() {
+
+
+        go = ((GlobalObject) getApplicationContext());
+        go.connectSocket();
+        mSocket = go.getSocket();
+
+
+        //index0
+        grids.get(36).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(0);
+            }
+        });
+
+        //index1
+        grids.get(38).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeMove(1);
 
             }
         });
@@ -34,6 +61,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(38).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(2);
 
             }
         });
@@ -41,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(39).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(3);
 
             }
         });
@@ -48,6 +77,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(40).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                makeMove(4);
 
             }
         });
@@ -55,14 +85,7 @@ public class GameActivity extends AppCompatActivity {
         grids.get(41).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-            }
-        });
-
-        grids.get(42).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+                makeMove(5);
             }
         });
 
@@ -155,4 +178,69 @@ public class GameActivity extends AppCompatActivity {
         grids.add(imageView41);
         grids.add(imageView42);
     }
+
+    //makes move
+    private void makeMove(int index) {
+        Intent intent = getIntent();
+        final int color = (int)intent.getSerializableExtra("color");
+
+
+        String jSonmove = JsonUtils.toJsonMove(color, index);
+        if (color == 1) {
+            mSocket.emit("red_play_request", jSonmove);
+        } else if (color == 2) {
+            mSocket.emit("yellow_play_request", jSonmove);
+        }
+
+
+        Emitter.Listener listener = new Emitter.Listener() {
+
+            public void call(Object... args) {
+                Log.d("tink", "responded");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (color == 1) {
+                            listenRed();
+                        } else if (color == 2){
+                            listenYellow();
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    private void listenRed() {
+        Emitter.Listener listener = new Emitter.Listener() {
+
+            public void call(Object... args) {
+                Log.d("tink", "responded");
+                final JSONObject obj = (JSONObject)args[0];
+                try {
+                    final int done = obj.getInt("done");
+                    final boolean valid = obj.getBoolean("valid");
+                    final int position = obj.getInt("position");
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (done == 0 && valid) {
+
+                            }
+                        }
+                    });
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
+
+    private void listenYellow() {
+
+    }
+
 }
