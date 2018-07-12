@@ -32,7 +32,8 @@
         <activity android:name=".Activities.Tab3Activity"></activity>
         <activity android:name=".Activities.GalleryActivity"></activity>
         <activity android:name=".Activities.MakeRoomActivity"></activity>
-        <activity android:name=".Activities.GameActivity"></activity>
+        <activity android:name=".Activities.GameActivity"
+            android:configChanges="orientation|keyboardHidden" ></activity>
     </application>
 
 </manifest>

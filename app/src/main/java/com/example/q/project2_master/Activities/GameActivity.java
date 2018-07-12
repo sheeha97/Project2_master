@@ -1,6 +1,7 @@
 package com.example.q.project2_master.Activities;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,11 @@ public class GameActivity extends AppCompatActivity {
     Socket mSocket;
     GlobalObject go;
     TextView textView;
+    Emitter.Listener listener;
+    Emitter.Listener listenerYellowStart;
+    Emitter.Listener listenerDisconnect;
+    Emitter.Listener listenerWinner;
+    Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,12 +47,13 @@ public class GameActivity extends AppCompatActivity {
         go = ((GlobalObject) getApplicationContext());
         go.connectSocket();
         mSocket = go.getSocket();
+        mContext = this;
         createGrids();
 
         final int color = go.getUsercolor();
 
         if (color == 2) {
-            Emitter.Listener listener2 = new Emitter.Listener() {
+            listenerYellowStart = new Emitter.Listener() {
 
                 public void call(Object... args) {
                     runOnUiThread(new Runnable() {
@@ -59,12 +66,12 @@ public class GameActivity extends AppCompatActivity {
                     });
                 }
             };
-            mSocket.on("unable_buttons", listener2);
+            mSocket.on("unable_buttons", listenerYellowStart);
             Intent intent = getIntent();
             final String targetName = (String)intent.getSerializableExtra("name");
             mSocket.emit("yellow_start", targetName);
         }
-        Emitter.Listener listener = new Emitter.Listener() {
+        listener = new Emitter.Listener() {
 
             public void call(Object... args) {
                 Log.d("tink", "responded");
@@ -104,6 +111,50 @@ public class GameActivity extends AppCompatActivity {
             }
         };
         mSocket.on("show_result", listener);
+
+        listenerDisconnect = new Emitter.Listener() {
+
+            public void call(Object... args) {
+                mSocket.disconnect();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "other user has disconnected!", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        };
+        mSocket.on("other_disconnected", listenerDisconnect);
+
+        /*
+        listenerWinner = new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                final String winnerName = (String) args[0];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
+                        alertDialog.setTitle("Winner!");
+                        alertDialog.setMessage("Player " + winnerName+" is the Winner!");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                });
+            }
+        };
+        mSocket.on("winner_announce_response", listenerWinner); */
+
+
+        Intent intent = getIntent();
+        final String targetName = (String)intent.getSerializableExtra("name");
+        mSocket.emit("yellow_start", targetName);
 
 
 
@@ -276,7 +327,18 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
 
         } else if (done == 1 || done == 2) {
-            win(done);
+            if (color == 1) {
+                grids.get(position - 1).setImageResource(R.drawable.red);
+            } else {
+                grids.get(position - 1).setImageResource(R.drawable.yellow);
+            }
+            String winnerName;
+            if (done == 1) {
+                winnerName = "Red";
+            } else {
+                winnerName = "Yellow";
+            }
+            Toast.makeText(this, "Game Over! \n" + winnerName + " is the winner!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -291,20 +353,33 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "INVALID MOVE, please choose a different index", Toast.LENGTH_SHORT).show();
 
         } else if (done == 1 || done == 2) {
-            win(done);
+            if (color == 1) {
+                grids.get(position - 1).setImageResource(R.drawable.red);
+            } else {
+                grids.get(position - 1).setImageResource(R.drawable.yellow);
+            }
+            String winnerName;
+            if (done == 1) {
+                winnerName = "Red";
+            } else {
+                winnerName = "Yellow";
+            }
+            Toast.makeText(this, "Game Over! \n" + winnerName + " is the winner!", Toast.LENGTH_LONG).show();
+
         }
     }
 
 
 
-    private void win(int winner) {
+    /*
+    private void win(int winner, Context curContext) {
         String winnerName;
         if (winner == 1) {
             winnerName = "Red";
         } else {
             winnerName = "Yellow";
         }
-        AlertDialog alertDialog = new AlertDialog.Builder(GameActivity.this).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Winner!");
         alertDialog.setMessage("Player " + winnerName+" is the Winner!");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -314,13 +389,16 @@ public class GameActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
-    }
+    } */
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mSocket.disconnect();
+
+        Intent intent = new Intent(GameActivity.this, Tab3Activity.class);
+        startActivity(intent);
     }
 
 }
