@@ -29,6 +29,6 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="Click to Start"
-        android:textColor="@android:color/white" />
+        android:text="     Click to Start"
+        android:textColor="@android:color/white"/>
 </RelativeLayout>

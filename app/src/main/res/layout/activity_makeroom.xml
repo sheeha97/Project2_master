@@ -7,26 +7,46 @@
     android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/start_button"
-        android:layout_width="wrap_content"
-        android:layout_height="83dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="241dp"
-        android:background="@drawable/ic_play"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="103dp" />
-
-    <TextView
-        android:id="@+id/loading_textview"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="237dp"
-        android:text="Welcome and click to accpet users..."
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="259dp"
-        android:textColor="@color/colorAccent"/>
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/creater_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorAccent"
+                android:layout_marginBottom="100dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/loading_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Welcome and click to accpet users..."
+                android:textColor="@color/colorAccent" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/start_button"
+                android:layout_width="wrap_content"
+                android:layout_height="83dp"
+                android:background="@drawable/ic_play"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
 </RelativeLayout>

@@ -31,6 +31,7 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
     Socket mSocket;
     GlobalObject go;
     TextView textView;
+    TextView createrNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
         setContentView(R.layout.activity_makeroom);
         startBtn = findViewById(R.id.start_button);
         textView = findViewById(R.id.loading_textview);
+        createrNameTextView = findViewById(R.id.creater_name_textview);
+        createrNameTextView.setText("Your name is: " + MainActivity.userName);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { //'create_response', 'create_request'
@@ -53,7 +56,7 @@ public class MakeRoomActivity extends AppCompatActivity {  //TODO: disconnect so
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                textView.setText("Yellow user is not connected yet...");
+                                textView.setText("Yellow player is not connected yet...");
                                 listenYellow(mSocket);
                             }
                         });

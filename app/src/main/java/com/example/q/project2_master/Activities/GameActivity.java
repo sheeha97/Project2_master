@@ -316,4 +316,11 @@ public class GameActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSocket.disconnect();
+    }
+
 }
